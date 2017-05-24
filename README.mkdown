@@ -1,0 +1,6 @@
+ *Battleship Game*
+
+ - Once the program starts, a board is displayed with (A-J, 1-10)
+- Player is prompted for a move
+- Player plays a move
+- Board updates to show player's move
