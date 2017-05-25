@@ -16,6 +16,7 @@ describe Grid do
   it "draws a grid thats 3 by 3" do
     grid = Grid.new
     expect(grid.draw_grid(3)).to eq(""". . .
+. . .
 . . .""")
   end
 
