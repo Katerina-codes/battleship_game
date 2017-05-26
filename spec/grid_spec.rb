@@ -21,4 +21,8 @@ describe Grid do
     expect(subject.get_letters(2)).to eq(" A B ")
   end
 
+  it "draws letters A - J for grid of 10" do
+    expect(subject.get_letters(10)).to eq(" A B C D E F G H I J ")
+  end
+
 end
