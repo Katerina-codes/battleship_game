@@ -2,9 +2,13 @@ require 'game'
 
 describe Game do
 
-  # it "Draw the grid and show it to the player" do
-  #   game = Game.new
-  #   expect(game.show_grid).to eq(".")
-  # end
+  it "Displays the grid and letter to the player" do
+    output = StringIO.new
+    display = Display.new(output)
+    grid = Grid.new
+    game = Game.new(grid, display)
+    game.show_grid(1)
+    expect(output.string).to include(" A ", ".")
+  end
 
 end

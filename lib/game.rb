@@ -1,13 +1,14 @@
+require 'display'
+
 class Game
 
-  def initialize(grid = Grid.new, display = display.new)
+  def initialize(grid, display)
     @grid = grid
     @display = display
   end
 
-  def show_grid
-    grid = @grid.draw_grid(10)
-    @display.display_grid(grid)
+  def show_grid(number)
+    @display.display_grid(number)
   end
 
 end
