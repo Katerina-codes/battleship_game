@@ -13,4 +13,7 @@ describe Grid do
 [".", "."]])
   end
 
+  it "draws a letter for grid of 1" do
+    expect(subject.get_letters(1)).to eq(" A ")
+  end
 end
