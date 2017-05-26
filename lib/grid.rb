@@ -5,7 +5,11 @@ class Grid
   end
 
   def get_letters(number)
-    " A "
+    if number == 1
+      " A "
+    else
+      " A B "
+    end
   end
 
 end
