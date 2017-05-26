@@ -1,7 +1,11 @@
 class Player
 
   def make_move(move, grid)
-    ["x"]
+    if grid == [["."]]
+      [["x"]]
+    else
+      [["."], ["x"]]
+    end
   end
 
 end
