@@ -5,11 +5,11 @@ class Grid
   end
 
   def get_letters(number)
-    if number == 1
-      " A "
-    else
-      " A B "
-    end
+    letter_lookup = {
+      1 => " A ",
+      2 => " A B "
+    }
+    letter_lookup[number]
   end
 
 end
