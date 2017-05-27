@@ -1,13 +1,14 @@
-require 'display'
+require_relative 'display'
 
 class Game
 
-  def initialize(grid, display)
-    @grid = grid
+  def initialize(display = Display.new)
+    # @grid = grid
     @display = display
   end
 
-  def show_grid(number)
+  def game_flow
+    number = 10
     @display.display_grid(number)
   end
 
