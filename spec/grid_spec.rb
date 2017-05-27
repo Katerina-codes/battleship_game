@@ -29,7 +29,7 @@ describe Grid do
   it "marks a position on the grid" do
     grid = subject.draw_grid(2)
     x_coordinate = 0
-    y_coordinate = 1
+    y_coordinate = 0
     mark = "X"
 
     new_grid = subject.mark_position(
@@ -39,6 +39,6 @@ describe Grid do
                     mark
                   )
 
-    expect(new_grid).to eq([[".", "X"], [".", "."]])
+    expect(new_grid).to eq([["X", "."], [".", "."]])
   end
 end

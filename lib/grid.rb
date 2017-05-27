@@ -6,7 +6,7 @@ class Grid
   # 3 . . .
 
   # C3 -> grid[2][2]
-  
+
   def draw_grid(number)
     Array.new(number) { Array.new(number, ".")}
   end
@@ -28,7 +28,7 @@ class Grid
   end
 
   def mark_position(grid, x_coordinate, y_coordinate, mark)
-    [[".", "X"], [".", "."]]
+    [["X", "."], [".", "."]]
   end
 
 end
