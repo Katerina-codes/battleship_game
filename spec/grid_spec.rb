@@ -26,7 +26,7 @@ describe Grid do
   end
 
 
-  it "marks a position on the grid" do
+  it "marks first position on the grid" do
     grid = subject.draw_grid(2)
     x_coordinate = 0
     y_coordinate = 0
@@ -41,4 +41,21 @@ describe Grid do
 
     expect(new_grid).to eq([["X", "."], [".", "."]])
   end
+
+  it "marks second position on the grid" do
+    grid = subject.draw_grid(2)
+    x_coordinate = 0
+    y_coordinate = 1
+    mark = "X"
+
+    new_grid = subject.mark_position(
+                    grid,
+                    x_coordinate,
+                    y_coordinate,
+                    mark
+                  )
+
+    expect(new_grid).to eq([[".", "X"], [".", "."]])
+  end
+
 end
