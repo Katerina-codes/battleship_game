@@ -28,11 +28,8 @@ class Grid
   end
 
   def mark_position(grid, x_coordinate, y_coordinate, mark)
-    if y_coordinate == 0
-      [["X", "."], [".", "."]]
-    else
-      [[".", "X"], [".", "."]]
-    end
+    grid[x_coordinate][y_coordinate] = mark
+    grid
   end
 
 end
