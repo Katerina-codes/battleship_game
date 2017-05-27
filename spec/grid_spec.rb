@@ -25,4 +25,20 @@ describe Grid do
     expect(subject.get_letters(10)).to eq(" A B C D E F G H I J ")
   end
 
+
+  it "marks a position on the grid" do
+    grid = subject.draw_grid(2)
+    x_coordinate = 0
+    y_coordinate = 1
+    mark = "X"
+
+    new_grid = subject.mark_position(
+                    grid,
+                    x_coordinate,
+                    y_coordinate,
+                    mark
+                  )
+
+    expect(new_grid).to eq([[".", "X"], [".", "."]])
+  end
 end

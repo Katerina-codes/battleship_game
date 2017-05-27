@@ -1,7 +1,14 @@
 class Grid
 
+  #   A B C
+  # 1 . . .
+  # 2 . . .
+  # 3 . . .
+
+  # C3 -> grid[2][2]
+  
   def draw_grid(number)
-    board = Array.new(number) { Array.new(number, ".")}
+    Array.new(number) { Array.new(number, ".")}
   end
 
   def get_letters(number)
@@ -18,6 +25,10 @@ class Grid
       10 => " A B C D E F G H I J "
     }
     letter_lookup[number]
+  end
+
+  def mark_position(grid, x_coordinate, y_coordinate, mark)
+    [[".", "X"], [".", "."]]
   end
 
 end
