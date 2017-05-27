@@ -1,6 +1,6 @@
 class Converter
 
-  def numbers_to_letters(number)
+  def number_to_letters(number)
     letter_lookup = {
       1 => " A ",
       2 => " A B ",

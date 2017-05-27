@@ -1,4 +1,5 @@
 require_relative 'grid'
+require_relative 'converter'
 
 class Display
 
@@ -8,8 +9,9 @@ class Display
 
   def display_grid(number)
     grid = Grid.new
+    converter = Converter.new
 
-    letters = grid.get_letters(number)
+    letters = converter.number_to_letters(number)
     grid = grid.draw_grid(number)
     @output.puts letters
     @output.print grid
