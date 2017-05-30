@@ -17,13 +17,12 @@ class Converter
   end
 
   def number_to_array_position(number)
-    if number == 1
-      0
-    elsif number == 2
-      1
-    else
-      2
-    end
+    number_to_array_position = {
+      1 => 0,
+      2 => 1,
+      3 => 2
+    }
+    number_to_array_position[number]
   end
 
 end
