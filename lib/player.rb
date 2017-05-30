@@ -16,7 +16,7 @@ class Player
     # end
   end
 
-  def get_coordinate
+  def get_number_coordinate
     @input.gets.chomp
   end
 

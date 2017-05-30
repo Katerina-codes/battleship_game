@@ -1,4 +1,5 @@
 require_relative 'display'
+require_relative 'player'
 
 class Game
 
@@ -7,7 +8,10 @@ class Game
   end
 
   def game_flow(number)
+    player = Player.new
     @display.display_grid(number)
+    @display.ask_for_move
+    player.get_number_coordinate
   end
 
 end
