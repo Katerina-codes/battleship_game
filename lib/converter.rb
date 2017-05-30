@@ -16,4 +16,8 @@ class Converter
     letter_lookup[number]
   end
 
+  def number_to_array_position(number)
+    0
+  end
+
 end

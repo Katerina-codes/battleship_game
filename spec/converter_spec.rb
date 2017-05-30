@@ -14,6 +14,8 @@ describe Converter do
       expect(subject.number_to_letters(10)).to eq("  A B C D E F G H I J ")
     end
 
-
+    it "converts number 1 to array position 0" do
+      expect(subject.number_to_array_position(1)).to eq(0)
+    end
 
 end
