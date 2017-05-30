@@ -18,4 +18,8 @@ describe Converter do
       expect(subject.number_to_array_position(1)).to eq(0)
     end
 
+    it "converts number 2 to array position 1" do
+      expect(subject.number_to_array_position(2)).to eq(1)
+    end
+
 end

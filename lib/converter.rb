@@ -17,7 +17,11 @@ class Converter
   end
 
   def number_to_array_position(number)
-    0
+    if number == 1
+      0
+    else
+      1
+    end
   end
 
 end
