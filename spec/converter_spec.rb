@@ -26,4 +26,8 @@ describe Converter do
       expect(subject.number_to_array_position(3)).to eq(2)
     end
 
+    it "converts number 10 to array position 9" do
+      expect(subject.number_to_array_position(10)).to eq(9)
+    end
+
 end
