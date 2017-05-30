@@ -24,7 +24,7 @@ class Display
       @output.print (index + 1).to_s + " ", row
     end
 
-    def ask_for_move
+    def ask_for_number
       @output.puts "Time to make a move. Please enter a number from 1 - 10"
     end
 

@@ -9,10 +9,10 @@ describe Display do
     expect(output.string).to include(" A ", ".")
   end
 
-  it "Asks the player for a coordinate" do
+  it "Asks the player for a number coordinate" do
     output = StringIO.new
     display = Display.new(output)
-    display.ask_for_move
+    display.ask_for_number
     expect(output.string).to eq("Time to make a move. Please enter a number from 1 - 10\n")
   end
 end

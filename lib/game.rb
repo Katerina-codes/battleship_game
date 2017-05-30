@@ -10,7 +10,7 @@ class Game
   def game_flow(number)
     player = Player.new
     @display.display_grid(number)
-    @display.ask_for_move
+    @display.ask_for_number
     player.get_number_coordinate
   end
 
