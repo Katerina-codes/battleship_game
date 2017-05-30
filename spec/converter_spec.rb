@@ -34,4 +34,8 @@ describe Converter do
       expect(subject.letter_to_array_position("a")).to eq(0)
     end
 
+    it "converts letter B to array position 1" do
+      expect(subject.letter_to_array_position("b")).to eq(1)
+    end
+
 end

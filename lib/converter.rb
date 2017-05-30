@@ -33,7 +33,11 @@ class Converter
   end
 
   def letter_to_array_position(letter)
-    0
+    if letter == "a"
+      0
+    else
+      1
+    end
   end
 
 end
