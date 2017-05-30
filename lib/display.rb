@@ -21,7 +21,7 @@ class Display
     end
 
     final_grid = formatted_grid.each_with_index.map do |row, index|
-      @output.print index.to_s + " ", row
+      @output.print (index + 1).to_s + " ", row
     end
 
     def ask_for_move
