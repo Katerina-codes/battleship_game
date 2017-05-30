@@ -32,4 +32,8 @@ class Converter
     number_to_array_position[number]
   end
 
+  def letter_to_array_position(letter)
+    0
+  end
+
 end

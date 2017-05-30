@@ -30,4 +30,8 @@ describe Converter do
       expect(subject.number_to_array_position(10)).to eq(9)
     end
 
+    it "converts letter A to array position 0" do
+      expect(subject.letter_to_array_position("a")).to eq(0)
+    end
+
 end
