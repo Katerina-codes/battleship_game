@@ -19,8 +19,10 @@ class Converter
   def number_to_array_position(number)
     if number == 1
       0
-    else
+    elsif number == 2
       1
+    else
+      2
     end
   end
 
