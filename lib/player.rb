@@ -20,4 +20,8 @@ class Player
     @input.gets.chomp
   end
 
+  def get_letter_coordinate
+    @input.gets.chomp.downcase
+  end
+
 end
