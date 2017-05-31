@@ -9,7 +9,7 @@ class Player
   end
 
   def is_number_valid?(number)
-    if number == 1
+    if number.to_i >= 1 && number.to_i <= 10
       true
     else
       false
@@ -18,6 +18,10 @@ class Player
 
   def get_letter_coordinate
     @input.gets.chomp.downcase
+  end
+
+  def is_letter_valid?(letter)
+    true
   end
 
 end
