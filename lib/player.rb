@@ -21,7 +21,11 @@ class Player
   end
 
   def is_letter_valid?(letter)
-    true
+    if letter == "a"
+      true
+    else
+      false
+    end
   end
 
 end
