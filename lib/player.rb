@@ -21,7 +21,8 @@ class Player
   end
 
   def is_letter_valid?(letter)
-    if letter == "a"
+    range = ("a".."j").to_a
+    if range.include?(letter)
       true
     else
       false

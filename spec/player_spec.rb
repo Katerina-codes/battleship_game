@@ -29,7 +29,7 @@ describe Player do
     expect(player.is_letter_valid?("a")).to eq(true)
   end
 
-  it "Returns false if letter is not from a - j" do
+  it "Returns false if letter is k" do
     player = Player.new
     expect(player.is_letter_valid?("k")).to eq(false)
   end
