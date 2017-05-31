@@ -10,7 +10,7 @@ class Grid
   end
 
   def is_mark_position_unique?(mark)
-    true
+    false
   end
 
 end

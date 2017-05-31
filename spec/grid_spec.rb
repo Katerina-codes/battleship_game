@@ -46,7 +46,7 @@ describe Grid do
   end
 
   it "checks if a position has been made before" do
-    expect(subject.is_mark_position_unique?([0, 0])).to eq(true)
+    expect(subject.is_mark_position_unique?([0, 0])).to eq(false)
   end
 
 end
