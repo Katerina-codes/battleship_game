@@ -45,4 +45,8 @@ describe Grid do
     expect(new_grid).to eq([[".", "X"], [".", "."]])
   end
 
+  it "checks if a position has been made before" do
+    expect(subject.is_mark_position_unique?([0, 0])).to eq(true)
+  end
+
 end

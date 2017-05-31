@@ -9,4 +9,8 @@ class Grid
     grid
   end
 
+  def is_mark_position_unique?(mark)
+    true
+  end
+
 end
