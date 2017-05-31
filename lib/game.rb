@@ -5,7 +5,7 @@ require_relative 'converter'
 
 class Game
 
-  def initialize(display = Display.new, player = Player.new, grid = Grid.new)
+  def initialize(display, player, grid)
     @display = display
     @player = player
     @grid = grid
@@ -24,7 +24,8 @@ class Game
     @display.ask_for_letter
     y_coordinate = @player.get_letter_coordinate
     array_position_2 = converter.letter_to_array_position(y_coordinate)
-    @grid.mark_position(grid, array_position_1, array_position_2, mark)
+    latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
+    @display.display_lastest_grid(latest_grid, number)
   end
 
 end

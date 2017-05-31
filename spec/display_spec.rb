@@ -23,4 +23,11 @@ describe Display do
     expect(output.string).to eq("Please enter a letter from A - J\n")
   end
 
+  it "displays the newest version of the grid" do
+    output = StringIO.new
+    display = Display.new(output)
+    display.display_lastest_grid([["X"]], 1)
+    expect(output.string).to include("A", "X")
+  end
+
 end
