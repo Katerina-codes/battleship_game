@@ -9,7 +9,11 @@ class Player
   end
 
   def is_number_valid?(number)
-    true
+    if number == 1
+      true
+    else
+      false
+    end
   end
 
   def get_letter_coordinate
