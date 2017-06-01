@@ -12,7 +12,12 @@ class Game
   end
 
   def only_get_valid_numbers
-    @display.ask_for_number
+    number = @player.get_number_coordinate
+    if number == "1"
+      number
+    else
+      @display.ask_for_number
+    end
   end
 
   def game_flow(number)
