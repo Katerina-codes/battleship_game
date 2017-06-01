@@ -29,7 +29,7 @@ class Game
     letter
   end
 
-  def move_played_before?(move)
+  def move_played_before?(move, past_moves)
     true
   end
 

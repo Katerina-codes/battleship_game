@@ -78,7 +78,7 @@ describe Game do
     expect(game.only_get_valid_letters).to eq("a")
   end
 
-  it "won't allow the same move twice" do
+  it "Returns true if move has been played before" do
     output = StringIO.new
     display = Display.new(output)
     player = Player.new
@@ -87,7 +87,7 @@ describe Game do
     past_moves = [[0, 0]]
     move = [0, 0]
 
-    expect(game.move_played_before?(move)).to eq(true)
+    expect(game.move_played_before?(move, past_moves)).to eq(true)
   end
 
 end
