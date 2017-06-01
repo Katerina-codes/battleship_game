@@ -9,11 +9,7 @@ class Player
   end
 
   def is_number_valid?(number)
-    if number.to_i >= 1 && number.to_i <= 10
-      true
-    else
-      false
-    end
+    number.to_i >= 1 && number.to_i <= 10
   end
 
   def get_letter_coordinate
@@ -22,11 +18,7 @@ class Player
 
   def is_letter_valid?(letter)
     range = ("a".."j").to_a
-    if range.include?(letter)
-      true
-    else
-      false
-    end
+    range.include?(letter)
   end
 
 end
