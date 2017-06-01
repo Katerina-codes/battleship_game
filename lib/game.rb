@@ -20,6 +20,10 @@ class Game
     number
   end
 
+  def only_get_valid_letters
+    @display.ask_for_letter
+  end
+
   def game_flow(number)
     converter = Converter.new
     converter.number_to_letters(number)

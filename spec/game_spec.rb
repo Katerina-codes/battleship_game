@@ -49,10 +49,22 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-
     game = Game.new(display, player, grid)
 
     expect(game.only_get_valid_numbers).to eq("1")
+  end
+
+  it "prompts for a letter until it's in the range of A - J" do
+    input = StringIO.new("K")
+    output = StringIO.new
+    display = Display.new(output)
+    player = Player.new(input)
+    grid = Grid.new
+    game = Game.new(display, player, grid)
+
+    game.only_get_valid_letters
+
+    expect(output.string).to eq("Please enter a letter from A - J\n")
   end
 
 end
