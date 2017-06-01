@@ -29,4 +29,18 @@ describe Game do
     expect(output.string).to include("A", "B", "1", "2", ".", ".", ".", "X")
   end
 
+  it "prompts for a number until it's in the range of 1 - 10" do
+    input = StringIO.new("11")
+    output = StringIO.new
+    display = Display.new(output)
+    player = Player.new(input)
+    grid = Grid.new
+
+    game = Game.new(display, player, grid)
+
+    game.only_get_valid_numbers
+
+    expect(output.string).to eq("Time to make a move. Please enter a number from 1 - 10\n")
+  end
+
 end

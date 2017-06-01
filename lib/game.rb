@@ -11,6 +11,10 @@ class Game
     @grid = grid
   end
 
+  def only_get_valid_numbers
+    @display.ask_for_number
+  end
+
   def game_flow(number)
     converter = Converter.new
     converter.number_to_letters(number)
@@ -19,10 +23,14 @@ class Game
 
     @display.display_grid(number)
     @display.ask_for_number
+
     x_coordinate = @player.get_number_coordinate
-    array_position_1 = converter.number_to_array_position(x_coordinate)
+    @player.is_number_valid?(x_coordinate)
     @display.ask_for_letter
     y_coordinate = @player.get_letter_coordinate
+    @player.is_letter_valid?(y_coordinate)
+
+    array_position_1 = converter.number_to_array_position(x_coordinate)
     array_position_2 = converter.letter_to_array_position(y_coordinate)
     latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
     @display.display_lastest_grid(latest_grid, number)
