@@ -21,7 +21,12 @@ class Game
   end
 
   def only_get_valid_letters
-    @display.ask_for_letter
+    letter = @player.get_letter_coordinate
+    until @player.is_letter_valid?(letter)
+      @display.ask_for_letter
+      letter = @player.get_letter_coordinate
+    end
+    letter
   end
 
   def game_flow(number)

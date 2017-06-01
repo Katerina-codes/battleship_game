@@ -55,7 +55,7 @@ describe Game do
   end
 
   it "prompts for a letter until it's in the range of A - J" do
-    input = StringIO.new("K")
+    input = StringIO.new("K\na")
     output = StringIO.new
     display = Display.new(output)
     player = Player.new(input)
@@ -65,6 +65,17 @@ describe Game do
     game.only_get_valid_letters
 
     expect(output.string).to eq("Please enter a letter from A - J\n")
+  end
+
+  it "returns the letter if it's inside the range" do
+    input = StringIO.new("a")
+    output = StringIO.new
+    display = Display.new(output)
+    player = Player.new(input)
+    grid = Grid.new
+    game = Game.new(display, player, grid)
+
+    expect(game.only_get_valid_letters).to eq("a")
   end
 
 end
