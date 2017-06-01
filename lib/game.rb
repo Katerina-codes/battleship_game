@@ -13,7 +13,7 @@ class Game
 
   def only_get_valid_numbers
     number = @player.get_number_coordinate
-    if number == "1"
+    if @player.is_number_valid?(number)
       number
     else
       @display.ask_for_number
