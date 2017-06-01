@@ -13,11 +13,11 @@ class Game
 
   def only_get_valid_numbers
     number = @player.get_number_coordinate
-    if @player.is_number_valid?(number)
-      number
-    else
+    until @player.is_number_valid?(number)
       @display.ask_for_number
+      number = @player.get_number_coordinate
     end
+    number
   end
 
   def game_flow(number)
@@ -27,10 +27,10 @@ class Game
     mark = "X"
 
     @display.display_grid(number)
-    @display.ask_for_number
 
-    x_coordinate = @player.get_number_coordinate
-    @player.is_number_valid?(x_coordinate)
+    @display.ask_for_number
+    x_coordinate = only_get_valid_numbers
+
     @display.ask_for_letter
     y_coordinate = @player.get_letter_coordinate
     @player.is_letter_valid?(y_coordinate)

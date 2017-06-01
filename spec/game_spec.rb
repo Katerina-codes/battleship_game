@@ -30,7 +30,7 @@ describe Game do
   end
 
   it "prompts for a number until it's in the range of 1 - 10" do
-    input = StringIO.new("11")
+    input = StringIO.new("11\n3")
     output = StringIO.new
     display = Display.new(output)
     player = Player.new(input)
