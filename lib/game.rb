@@ -29,6 +29,10 @@ class Game
     letter
   end
 
+  def move_played_before?(move)
+    true
+  end
+
   def game_flow(number)
     converter = Converter.new
     converter.number_to_letters(number)
