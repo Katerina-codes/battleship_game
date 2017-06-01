@@ -90,4 +90,16 @@ describe Game do
     expect(game.move_played_before?(move, past_moves)).to eq(true)
   end
 
+  it "Returns false if move hasn't been played before" do
+    output = StringIO.new
+    display = Display.new(output)
+    player = Player.new
+    grid = Grid.new
+    game = Game.new(display, player, grid)
+    past_moves = [[0, 0]]
+    move = [0, 1]
+
+    expect(game.move_played_before?(move, past_moves)).to eq(false)
+  end
+
 end

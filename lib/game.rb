@@ -30,7 +30,7 @@ class Game
   end
 
   def move_played_before?(move, past_moves)
-    true
+    past_moves.include?(move)
   end
 
   def game_flow(number)
