@@ -12,9 +12,4 @@ class Player
     @input.gets.chomp.downcase
   end
 
-  def is_letter_valid?(letter)
-    range = ("a".."j").to_a
-    range.include?(letter)
-  end
-
 end

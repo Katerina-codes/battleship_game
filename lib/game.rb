@@ -24,7 +24,7 @@ class Game
 
   def only_get_valid_letters
     letter = @player.get_letter_coordinate
-    until @player.is_letter_valid?(letter)
+    until @move_validator.is_letter_valid?(letter)
       @display.ask_for_letter
       letter = @player.get_letter_coordinate
     end

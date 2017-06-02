@@ -14,14 +14,4 @@ describe Player do
     expect(player.get_letter_coordinate).to eq("a")
   end
 
-  it "Returns true if letter is from a - j" do
-    player = Player.new
-    expect(player.is_letter_valid?("a")).to eq(true)
-  end
-
-  it "Returns false if letter is k" do
-    player = Player.new
-    expect(player.is_letter_valid?("k")).to eq(false)
-  end
-
 end
