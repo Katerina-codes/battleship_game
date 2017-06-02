@@ -3,11 +3,13 @@ require 'game'
 describe Game do
 
   it "Displays the grid and letter to the player" do
+    input = StringIO.new("3\nd")
     output = StringIO.new
     display = Display.new(output)
-    player = Player.new
+    player = Player.new(input)
     grid = Grid.new
-    game = Game.new(display, player, grid)
+    move_validator = MoveValidator.new(display, player)
+    game = Game.new(display, player, grid, move_validator)
     grid_size = 3
 
     game.game_flow(grid_size)
@@ -21,7 +23,8 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-    game = Game.new(display, player, grid)
+    move_validator = MoveValidator.new(display, player)
+    game = Game.new(display, player, grid, move_validator)
     grid_size = 2
 
     game.game_flow(grid_size)
@@ -35,7 +38,8 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-    game = Game.new(display, player, grid)
+    move_validator = MoveValidator.new(display, player)
+    game = Game.new(display, player, grid, move_validator)
 
     game.only_get_valid_letters
 
@@ -48,7 +52,8 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-    game = Game.new(display, player, grid)
+    move_validator = MoveValidator.new(display, player)
+    game = Game.new(display, player, grid, move_validator)
 
     expect(game.only_get_valid_letters).to eq("a")
   end
@@ -58,7 +63,8 @@ describe Game do
     display = Display.new(output)
     player = Player.new
     grid = Grid.new
-    game = Game.new(display, player, grid)
+    move_validator = MoveValidator.new(display, player)
+    game = Game.new(display, player, grid, move_validator)
     past_moves = [["1", "a"]]
     move = ["1", "a"]
 
@@ -70,7 +76,8 @@ describe Game do
     display = Display.new(output)
     player = Player.new
     grid = Grid.new
-    game = Game.new(display, player, grid)
+    move_validator = MoveValidator.new(display, player)
+    game = Game.new(display, player, grid, move_validator)
     past_moves = [["1", "a"]]
     move = ["1", "b"]
 

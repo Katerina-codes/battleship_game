@@ -6,7 +6,7 @@ require_relative 'move_validator'
 
 class Game
 
-  def initialize(display, player, grid, move_validator = MoveValidator.new)
+  def initialize(display, player, grid, move_validator)
     @display = display
     @player = player
     @grid = grid
@@ -28,7 +28,7 @@ class Game
 
   def game_flow(number)
     converter = Converter.new
-    converter.number_to_letters(number)
+    # converter.number_to_letters(number)
     grid = @grid.draw_grid(number)
     mark = "X"
     past_moves = []
@@ -39,7 +39,7 @@ class Game
     @display.ask_for_letter
     y_coordinate = only_get_valid_letters
 
-    p move = [x_coordinate, y_coordinate]
+    move = [x_coordinate, y_coordinate]
 
     if move_played_before?(move, past_moves)
       game_flow(number)

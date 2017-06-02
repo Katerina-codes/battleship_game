@@ -3,7 +3,7 @@ require_relative 'display'
 
 class MoveValidator
 
-  def initialize(display = Display.new, player = Player.new)
+  def initialize(display, player)
     @display = display
     @player = player
   end
