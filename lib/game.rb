@@ -38,16 +38,25 @@ class Game
     converter.number_to_letters(number)
     grid = @grid.draw_grid(number)
     mark = "X"
+    past_moves = []
 
     @display.display_grid(number)
     @display.ask_for_number
     x_coordinate = only_get_valid_numbers
     @display.ask_for_letter
     y_coordinate = only_get_valid_letters
-    array_position_1 = converter.number_to_array_position(x_coordinate)
-    array_position_2 = converter.letter_to_array_position(y_coordinate)
-    latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
-    @display.display_lastest_grid(latest_grid, number)
+
+    p move = [x_coordinate, y_coordinate]
+
+    if move_played_before?(move, past_moves)
+      game_flow(number)
+    else
+      past_moves.push(move)
+      array_position_1 = converter.number_to_array_position(x_coordinate)
+      array_position_2 = converter.letter_to_array_position(y_coordinate)
+      latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
+      @display.display_lastest_grid(latest_grid, number)
+    end
   end
 
 end

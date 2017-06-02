@@ -84,8 +84,8 @@ describe Game do
     player = Player.new
     grid = Grid.new
     game = Game.new(display, player, grid)
-    past_moves = [[0, 0]]
-    move = [0, 0]
+    past_moves = [["1", "a"]]
+    move = ["1", "a"]
 
     expect(game.move_played_before?(move, past_moves)).to eq(true)
   end
@@ -96,8 +96,8 @@ describe Game do
     player = Player.new
     grid = Grid.new
     game = Game.new(display, player, grid)
-    past_moves = [[0, 0]]
-    move = [0, 1]
+    past_moves = [["1", "a"]]
+    move = ["1", "b"]
 
     expect(game.move_played_before?(move, past_moves)).to eq(false)
   end
