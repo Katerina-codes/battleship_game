@@ -13,15 +13,6 @@ class Game
     @move_validator = move_validator
   end
 
-  def only_get_valid_numbers
-    number = @player.get_number_coordinate
-    until @move_validator.is_number_valid?(number)
-      @display.ask_for_number
-      number = @player.get_number_coordinate
-    end
-    number
-  end
-
   def only_get_valid_letters
     letter = @player.get_letter_coordinate
     until @move_validator.is_letter_valid?(letter)
@@ -44,7 +35,7 @@ class Game
 
     @display.display_grid(number)
     @display.ask_for_number
-    x_coordinate = only_get_valid_numbers
+    x_coordinate = @move_validator.only_get_valid_numbers
     @display.ask_for_letter
     y_coordinate = only_get_valid_letters
 
