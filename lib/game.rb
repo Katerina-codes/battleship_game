@@ -2,18 +2,20 @@ require_relative 'display'
 require_relative 'player'
 require_relative 'grid'
 require_relative 'converter'
+require_relative 'move_validator'
 
 class Game
 
-  def initialize(display, player, grid)
+  def initialize(display, player, grid, move_validator = MoveValidator.new)
     @display = display
     @player = player
     @grid = grid
+    @move_validator = move_validator
   end
 
   def only_get_valid_numbers
     number = @player.get_number_coordinate
-    until @player.is_number_valid?(number)
+    until @move_validator.is_number_valid?(number)
       @display.ask_for_number
       number = @player.get_number_coordinate
     end
