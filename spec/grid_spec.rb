@@ -60,7 +60,7 @@ describe Grid do
                     y_coordinate,
                   )
 
-    expect(new_grid).to eq([["/", "."]])
+    expect(new_grid).to eq([["/"]])
   end
 
   it "marks another ship hit on the grid" do
