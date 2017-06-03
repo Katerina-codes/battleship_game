@@ -37,21 +37,17 @@ class Game
 
   def ship_coordinates(move)
     ships = [[2, "j"], [2, "k"], [6, "b"], [6, "c"], [6, "d"], [8, "e"], [9, "e"], [10, "e"], [4, "f"], [4, "g"], [4, "h"], [4, "i"], [1, "c"], [2, "c"], [3, "c"], [4, "c"], [5, "c"], [2, "j"], [2, "k"], [6, "b"], [6, "c"], [6, "d"]]
-    if ships.include?(move)
-      true
-    end
+    ships.include?(move)
   end
 
   def game_flow(number)
     converter = Converter.new
-    # converter.number_to_letters(number)
     grid = @grid.draw_grid(number)
     mark = "X"
     past_moves = []
     ship_locations = 17
 
 
-    # until ship_locations == 0
     @display.display_grid(number)
     @display.ask_for_number
     x_coordinate = only_get_valid_numbers
@@ -66,15 +62,9 @@ class Game
       past_moves.push(move)
       array_position_1 = converter.number_to_array_position(x_coordinate)
       array_position_2 = converter.letter_to_array_position(y_coordinate)
-      # ships_locations_include_move?(move) = true
-      # ship_locations -= 1
-      # mark_ship(grid, array_position_1, array_position_2) - X
-      # display_lastest_grid
-      # else
       latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
 
       @display.display_lastest_grid(latest_grid, number)
-    # end
   end
   end
 

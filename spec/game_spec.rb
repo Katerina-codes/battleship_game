@@ -110,7 +110,7 @@ describe Game do
     expect(game.only_get_valid_numbers).to eq("1")
   end
 
-  it "checks if move is one of the ship coordinates moves" do
+  it "Returns true if move is present in the ship coordinates array" do
     player = Player.new
     display = Display.new
     grid = Grid.new
@@ -119,5 +119,15 @@ describe Game do
 
     expect(game.ship_coordinates([6, "b"])).to eq(true)
   end
+
+    it "Returns false if move is not present in the ship coordinates array" do
+      player = Player.new
+      display = Display.new
+      grid = Grid.new
+      move_validator = MoveValidator.new
+      game = Game.new(display, player, grid, move_validator)
+
+      expect(game.ship_coordinates([10, "b"])).to eq(false)
+    end
 
 end
