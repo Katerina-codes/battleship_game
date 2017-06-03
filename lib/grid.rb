@@ -13,4 +13,8 @@ class Grid
     false
   end
 
+  def mark_ship_hit(grid, x_coordinate, y_coordinate)
+    [["/", "."]]
+  end
+
 end

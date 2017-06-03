@@ -49,4 +49,18 @@ describe Grid do
     expect(subject.is_mark_position_unique?([0, 0])).to eq(false)
   end
 
+  it "marks a ship hit on the grid" do
+    grid = subject.draw_grid(1)
+    x_coordinate = 0
+    y_coordinate = 0
+
+    new_grid = subject.mark_ship_hit(
+                    grid,
+                    x_coordinate,
+                    y_coordinate,
+                  )
+
+    expect(new_grid).to eq([["/", "."]])
+  end
+
 end
