@@ -22,6 +22,15 @@ class Game
     letter
   end
 
+  def only_get_valid_numbers
+    number = @player.get_number_coordinate
+    until @move_validator.is_number_valid?(number)
+      @display.ask_for_number
+      number = @player.get_number_coordinate
+    end
+    number
+  end
+
   def move_played_before?(move, past_moves)
     past_moves.include?(move)
   end
@@ -32,10 +41,13 @@ class Game
     grid = @grid.draw_grid(number)
     mark = "X"
     past_moves = []
+    #ship_locations = 17
 
+
+    # until ship_locations == 0
     @display.display_grid(number)
     @display.ask_for_number
-    x_coordinate = @move_validator.only_get_valid_numbers
+    x_coordinate = only_get_valid_numbers
     @display.ask_for_letter
     y_coordinate = only_get_valid_letters
 
@@ -47,7 +59,13 @@ class Game
       past_moves.push(move)
       array_position_1 = converter.number_to_array_position(x_coordinate)
       array_position_2 = converter.letter_to_array_position(y_coordinate)
+      # ships_locations_include_move?(move) = true
+      # ship_locations -= 1
+      # mark_ship(grid, array_position_1, array_position_2) - X
+      # display_lastest_grid
+      # else
       latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
+
       @display.display_lastest_grid(latest_grid, number)
     end
   end

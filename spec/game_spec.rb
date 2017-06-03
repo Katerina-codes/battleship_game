@@ -8,7 +8,7 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-    move_validator = MoveValidator.new(display, player)
+    move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
     grid_size = 3
 
@@ -23,7 +23,7 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-    move_validator = MoveValidator.new(display, player)
+    move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
     grid_size = 2
 
@@ -38,7 +38,7 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-    move_validator = MoveValidator.new(display, player)
+    move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
 
     game.only_get_valid_letters
@@ -52,7 +52,7 @@ describe Game do
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
-    move_validator = MoveValidator.new(display, player)
+    move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
 
     expect(game.only_get_valid_letters).to eq("a")
@@ -63,7 +63,7 @@ describe Game do
     display = Display.new(output)
     player = Player.new
     grid = Grid.new
-    move_validator = MoveValidator.new(display, player)
+    move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
     past_moves = [["1", "a"]]
     move = ["1", "a"]
@@ -76,12 +76,38 @@ describe Game do
     display = Display.new(output)
     player = Player.new
     grid = Grid.new
-    move_validator = MoveValidator.new(display, player)
+    move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
     past_moves = [["1", "a"]]
     move = ["1", "b"]
 
     expect(game.move_played_before?(move, past_moves)).to eq(false)
+  end
+
+  it "prompts for a number until it's in the range of 1 - 10" do
+    input = StringIO.new("11\n3")
+    output = StringIO.new
+    player = Player.new(input)
+    display = Display.new(output)
+    grid = Grid.new
+    move_validator = MoveValidator.new
+    game = Game.new(display, player, grid, move_validator)
+
+    game.only_get_valid_numbers
+
+    expect(output.string).to eq("Time to make a move. Please enter a number from 1 - 10\n")
+  end
+
+  it "returns the number if a valid number is entered" do
+    input = StringIO.new("1")
+    output = StringIO.new
+    player = Player.new(input)
+    display = Display.new(output)
+    grid = Grid.new
+    move_validator = MoveValidator.new
+    game = Game.new(display, player, grid, move_validator)
+
+    expect(game.only_get_valid_numbers).to eq("1")
   end
 
 end
