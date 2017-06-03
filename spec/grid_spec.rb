@@ -63,4 +63,19 @@ describe Grid do
     expect(new_grid).to eq([["/", "."]])
   end
 
+  it "marks another ship hit on the grid" do
+    grid = subject.draw_grid(1)
+    x_coordinate = 0
+    y_coordinate = 1
+
+    new_grid = subject.mark_ship_hit(
+                    grid,
+                    x_coordinate,
+                    y_coordinate,
+                  )
+
+    expect(new_grid).to eq([[".", "/"]])
+  end
+
+
 end

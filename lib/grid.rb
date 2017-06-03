@@ -14,7 +14,11 @@ class Grid
   end
 
   def mark_ship_hit(grid, x_coordinate, y_coordinate)
-    [["/", "."]]
+    if y_coordinate == 0
+      [["/", "."]]
+    else
+      [[".", "/"]]
+    end
   end
 
 end
