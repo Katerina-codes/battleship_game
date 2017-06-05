@@ -74,6 +74,3 @@ class Game
   end
 
 end
-
-game = Game.new(Display.new, Player.new, Grid.new, MoveValidator.new)
-game.game_flow(10, [[1, 9]])
