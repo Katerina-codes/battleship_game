@@ -3,22 +3,23 @@ require 'game'
 describe Game do
 
   it "Displays the grid and letter to the player" do
-    input = StringIO.new("3\nd")
+    input = StringIO.new("1\na")
     output = StringIO.new
     display = Display.new(output)
     player = Player.new(input)
     grid = Grid.new
     move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
-    grid_size = 3
+    grid_size = 1
+    ship_coordinates = [[0, 0]]
 
-    game.game_flow(grid_size)
+    game.game_flow(grid_size, ship_coordinates)
 
     expect(output.string).to include(" A ", ".")
   end
 
   it "Updates the grid with a marked position" do
-    input = StringIO.new("2\nB\n2\nB\b2\nB")
+    input = StringIO.new("2\nB\b2\na\n1\nb")
     output = StringIO.new
     display = Display.new(output)
     player = Player.new(input)
@@ -26,10 +27,11 @@ describe Game do
     move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
     grid_size = 2
+    ship_coordinates = [[0, 1]]
 
-    game.game_flow(grid_size)
+    game.game_flow(grid_size, ship_coordinates)
 
-    expect(output.string).to include("A", "B", "1", "2", ".", ".", ".", "X")
+    expect(output.string).to include("A", "B", "1", "2", ".", ".", "/", "X")
   end
 
   it "prompts for a letter until it's in the range of A - J" do
@@ -117,7 +119,7 @@ describe Game do
     move_validator = MoveValidator.new
     game = Game.new(display, player, grid, move_validator)
 
-    expect(game.ship_coordinates([6, "b"])).to eq(true)
+    expect(game.ship_coordinates([5, 1], [[5, 1]])).to eq(true)
   end
 
     it "Returns false if move is not present in the ship coordinates array" do
@@ -127,7 +129,21 @@ describe Game do
       move_validator = MoveValidator.new
       game = Game.new(display, player, grid, move_validator)
 
-      expect(game.ship_coordinates([10, "b"])).to eq(false)
+      expect(game.ship_coordinates([9, 1],[[9, 2]])).to eq(false)
+    end
+
+    it "marks ships and normal positions on the grid" do
+      input = StringIO.new("1\na\n2\nc\n1\nb")
+      output = StringIO.new
+      player = Player.new(input)
+      display = Display.new(output)
+      grid = Grid.new
+      move_validator = MoveValidator.new
+      game = Game.new(display, player, grid, move_validator)
+      grid_size = 3
+      ship_coordinates = [[0, 1], [1, 2]]
+
+      expect(game.game_flow(grid_size, ship_coordinates)).to include(["X", "/", "."], [".", ".", "/"])
     end
 
 end

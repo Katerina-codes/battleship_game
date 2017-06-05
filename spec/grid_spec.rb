@@ -77,5 +77,4 @@ describe Grid do
     expect(new_grid).to eq([[".", "/"]])
   end
 
-
 end

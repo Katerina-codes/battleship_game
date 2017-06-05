@@ -35,37 +35,42 @@ class Game
     past_moves.include?(move)
   end
 
-  def ship_coordinates(move)
-    ships = [[2, "j"], [2, "k"], [6, "b"], [6, "c"], [6, "d"], [8, "e"], [9, "e"], [10, "e"], [4, "f"], [4, "g"], [4, "h"], [4, "i"], [1, "c"], [2, "c"], [3, "c"], [4, "c"], [5, "c"], [2, "j"], [2, "k"], [6, "b"], [6, "c"], [6, "d"]]
-    ships.include?(move)
+  def ship_coordinates(move, ship_coordinates)
+    ship_coordinates.include?(move)
   end
 
-  def game_flow(number)
+  def game_flow(grid_size, ship_coordinates)
     converter = Converter.new
-    grid = @grid.draw_grid(number)
+    grid = @grid.draw_grid(grid_size)
     mark = "X"
     past_moves = []
-    ship_locations = 17
+    coordinates_list = ship_coordinates.length
+    @display.display_grid(grid_size)
 
-
-    @display.display_grid(number)
-    @display.ask_for_number
-    x_coordinate = only_get_valid_numbers
-    @display.ask_for_letter
-    y_coordinate = only_get_valid_letters
-
-    move = [x_coordinate, y_coordinate]
-
-    if move_played_before?(move, past_moves)
-      game_flow(number)
-    else
-      past_moves.push(move)
-      array_position_1 = converter.number_to_array_position(x_coordinate)
-      array_position_2 = converter.letter_to_array_position(y_coordinate)
-      latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
-
-      @display.display_lastest_grid(latest_grid, number)
-  end
+    until coordinates_list == 0
+      @display.ask_for_number
+      x_coordinate = only_get_valid_numbers
+      @display.ask_for_letter
+      y_coordinate = only_get_valid_letters
+      move = [x_coordinate, y_coordinate]
+      if move_played_before?(move, past_moves)
+        game_flow(grid_size, ship_coordinates)
+      else
+        past_moves.push(move)
+        array_position_1 = converter.number_to_array_position(x_coordinate)
+        array_position_2 = converter.letter_to_array_position(y_coordinate)
+        move = [array_position_1, array_position_2]
+        if ship_coordinates(move, ship_coordinates)
+          coordinates_list -= 1
+          latest_hit_grid = @grid.mark_ship_hit(grid, array_position_1, array_position_2)
+          @display.display_lastest_grid(latest_hit_grid, grid_size)
+        else
+          latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
+          @display.display_lastest_grid(latest_grid, grid_size)
+        end
+      end
+    end
+    latest_grid
   end
 
 end
