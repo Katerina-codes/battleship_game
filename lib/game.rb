@@ -36,7 +36,7 @@ class Game
   end
 
   def ship_coordinates(move, ship_coordinates)
-    ship_coordinates.include?(move)
+    p ship_coordinates.include?(move)
   end
 
   def game_flow(grid_size, ship_coordinates)
@@ -70,7 +70,10 @@ class Game
         end
       end
     end
-    latest_grid
+    latest_hit_grid
   end
 
 end
+
+game = Game.new(Display.new, Player.new, Grid.new, MoveValidator.new)
+game.game_flow(10, [[1, 9]])
