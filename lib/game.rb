@@ -36,7 +36,7 @@ class Game
   end
 
   def ship_coordinates(move, ship_coordinates)
-    p ship_coordinates.include?(move)
+    ship_coordinates.include?(move)
   end
 
   def game_flow(grid_size, ship_coordinates)
@@ -53,6 +53,7 @@ class Game
       @display.ask_for_letter
       y_coordinate = only_get_valid_letters
       move = [x_coordinate, y_coordinate]
+
       if move_played_before?(move, past_moves)
         game_flow(grid_size, ship_coordinates)
       else
@@ -60,6 +61,7 @@ class Game
         array_position_1 = converter.number_to_array_position(x_coordinate)
         array_position_2 = converter.letter_to_array_position(y_coordinate)
         move = [array_position_1, array_position_2]
+
         if ship_coordinates(move, ship_coordinates)
           coordinates_list -= 1
           latest_hit_grid = @grid.mark_ship_hit(grid, array_position_1, array_position_2)
