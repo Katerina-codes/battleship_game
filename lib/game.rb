@@ -39,6 +39,14 @@ class Game
     ship_coordinates.include?(move)
   end
 
+  def new_move
+    @display.ask_for_number
+    x_coordinate = only_get_valid_numbers
+    @display.ask_for_letter
+    y_coordinate = only_get_valid_letters
+    [x_coordinate, y_coordinate]
+  end
+
   def game_flow(grid_size, ship_coordinates)
     converter = Converter.new
     grid = @grid.draw_grid(grid_size)
@@ -48,11 +56,9 @@ class Game
     @display.display_grid(grid_size)
 
     until coordinates_list == 0
-      @display.ask_for_number
-      x_coordinate = only_get_valid_numbers
-      @display.ask_for_letter
-      y_coordinate = only_get_valid_letters
-      move = [x_coordinate, y_coordinate]
+      move = new_move
+      x_coordinate = move[0]
+      y_coordinate = move[1]
 
       if move_played_before?(move, past_moves)
         game_flow(grid_size, ship_coordinates)
