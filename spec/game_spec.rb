@@ -1,15 +1,15 @@
 require 'game'
 
 describe Game do
+  let(:output) { StringIO.new }
+  let(:display) { Display.new(output) }
+  let(:grid) { Grid.new }
+  let(:move_validator) { MoveValidator.new }
+  let(:player_without_input) { Player.new }
 
   it "Displays the grid and letter to the player" do
-    input = StringIO.new("1\na")
-    output = StringIO.new
-    display = Display.new(output)
-    player = Player.new(input)
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    player = player_with_input("1\na")
+    game = new_game_instance(player)
     grid_size = 1
     ship_coordinates = [[0, 0]]
 
@@ -19,13 +19,8 @@ describe Game do
   end
 
   it "Updates the grid with a marked position" do
-    input = StringIO.new("2\nB\b2\na\n1\nb")
-    output = StringIO.new
-    display = Display.new(output)
-    player = Player.new(input)
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    player = player_with_input("2\nB\b2\na\n1\nb")
+    game = new_game_instance(player)
     grid_size = 2
     ship_coordinates = [[0, 1]]
 
@@ -35,13 +30,8 @@ describe Game do
   end
 
   it "prompts for a letter until it's in the range of A - J" do
-    input = StringIO.new("K\na")
-    output = StringIO.new
-    display = Display.new(output)
-    player = Player.new(input)
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    player = player_with_input("K\na")
+    game = new_game_instance(player)
 
     game.only_get_valid_letters
 
@@ -49,24 +39,15 @@ describe Game do
   end
 
   it "returns the letter if it's inside the range" do
-    input = StringIO.new("a")
-    output = StringIO.new
-    display = Display.new(output)
-    player = Player.new(input)
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    player = player_with_input("a")
+    game = new_game_instance(player)
 
     expect(game.only_get_valid_letters).to eq("a")
   end
 
   it "Returns true if move has been played before" do
-    output = StringIO.new
-    display = Display.new(output)
-    player = Player.new
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    game = new_game_instance(player_without_input)
+
     past_moves = [["1", "a"]]
     move = ["1", "a"]
 
@@ -74,12 +55,8 @@ describe Game do
   end
 
   it "Returns false if move hasn't been played before" do
-    output = StringIO.new
-    display = Display.new(output)
-    player = Player.new
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    game = new_game_instance(player_without_input)
+
     past_moves = [["1", "a"]]
     move = ["1", "b"]
 
@@ -87,13 +64,8 @@ describe Game do
   end
 
   it "prompts for a number until it's in the range of 1 - 10" do
-    input = StringIO.new("11\n3")
-    output = StringIO.new
-    player = Player.new(input)
-    display = Display.new(output)
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    player = player_with_input("11\n3")
+    game = new_game_instance(player)
 
     game.only_get_valid_numbers
 
@@ -101,49 +73,40 @@ describe Game do
   end
 
   it "returns the number if a valid number is entered" do
-    input = StringIO.new("1")
-    output = StringIO.new
-    player = Player.new(input)
-    display = Display.new(output)
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    player = player_with_input("1")
+    game = new_game_instance(player)
 
     expect(game.only_get_valid_numbers).to eq("1")
   end
 
   it "Returns true if move is present in the ship coordinates array" do
-    player = Player.new
-    display = Display.new
-    grid = Grid.new
-    move_validator = MoveValidator.new
-    game = Game.new(display, player, grid, move_validator)
+    game = new_game_instance(player_without_input)
 
     expect(game.ship_coordinates([5, 1], [[5, 1]])).to eq(true)
   end
 
     it "Returns false if move is not present in the ship coordinates array" do
-      player = Player.new
-      display = Display.new
-      grid = Grid.new
-      move_validator = MoveValidator.new
-      game = Game.new(display, player, grid, move_validator)
+      game = new_game_instance(player_without_input)
 
       expect(game.ship_coordinates([9, 1],[[9, 2]])).to eq(false)
     end
 
     it "marks ships and normal positions on the grid" do
-      input = StringIO.new("1\na\n2\nc\n1\nb")
-      output = StringIO.new
-      player = Player.new(input)
-      display = Display.new(output)
-      grid = Grid.new
-      move_validator = MoveValidator.new
-      game = Game.new(display, player, grid, move_validator)
+      player = player_with_input("1\na\n2\nc\n1\nb")
+      game = new_game_instance(player)
       grid_size = 3
       ship_coordinates = [[0, 1], [1, 2]]
 
       expect(game.game_flow(grid_size, ship_coordinates)).to include(["X", "/", "."], [".", ".", "/"])
+    end
+
+    def player_with_input(player_input)
+      input = StringIO.new(player_input)
+      Player.new(input)
+    end
+
+    def new_game_instance(player)
+      Game.new(display, player, grid, move_validator)
     end
 
 end
