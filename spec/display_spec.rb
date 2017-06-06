@@ -24,4 +24,13 @@ describe Display do
     expect(output.string).to include("A", "X")
   end
 
+  it "displays 'This move is a has been entered before, enter another one!'" do
+    output = StringIO.new("This move is a has been entered before, enter another one!")
+    display = Display.new(output)
+
+    display.display_repeated_move_error
+
+    expect(output.string).to eq("This move is a has been entered before, enter another one!\n")
+  end
+
 end

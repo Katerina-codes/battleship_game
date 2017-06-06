@@ -33,6 +33,10 @@ class Display
       @output.puts "Please enter a letter from A - J"
     end
 
+    def display_repeated_move_error
+      @output.puts "This move is a has been entered before, enter another one!"
+    end
+
     def display_lastest_grid(grid, number)
       converter = Converter.new
 
