@@ -61,7 +61,7 @@ class Game
       y_coordinate = move[1]
 
       if move_played_before?(move, past_moves)
-        game_flow(grid_size, ship_coordinates)
+        puts "Try again"
       else
         past_moves.push(move)
         array_position_1 = converter.number_to_array_position(x_coordinate)

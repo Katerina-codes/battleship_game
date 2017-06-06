@@ -100,6 +100,15 @@ describe Game do
       expect(game.game_flow(grid_size, ship_coordinates)).to include(["X", "/", "."], [".", ".", "/"])
     end
 
+    it "does not reset the board if a player enters a move twice" do
+      player = player_with_input("1\na\n1\na\n1\nb")
+      game = new_game_instance(player)
+      grid_size = 2
+      ship_coordinates = [[0, 0], [0, 1]]
+
+      expect(game.game_flow(grid_size, ship_coordinates)).to eq([["/", "/"],[".", "."]])
+    end
+
     def player_with_input(player_input)
       input = StringIO.new(player_input)
       Player.new(input)
