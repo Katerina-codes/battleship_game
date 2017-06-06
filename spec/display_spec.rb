@@ -25,7 +25,7 @@ describe Display do
   end
 
   it "displays 'This move has been entered before, enter another one!'" do
-    output = StringIO.new("This move has been entered before, enter another one!")
+    output = StringIO.new
     display = Display.new(output)
 
     display.display_repeated_move_error
