@@ -1,7 +1,6 @@
 require 'move_validator'
 
 describe MoveValidator do
-  let(:display) { Display.new }
 
   it "only allows numbers from 1-10" do
     expect(subject.is_number_valid?(1)).to eq(true)
