@@ -49,10 +49,9 @@ class Game
 
   def convert_move(x_coordinate, y_coordinate)
     converter = Converter.new
-
     array_position_1 = converter.number_to_array_position(x_coordinate)
     array_position_2 = converter.letter_to_array_position(y_coordinate)
-    move = [array_position_1, array_position_2]
+    [array_position_1, array_position_2]
   end
 
   def game_flow(grid_size, ship_coordinates)
@@ -74,7 +73,7 @@ class Game
         converted_move = convert_move(x_coordinate, y_coordinate)
         array_position_1 = converted_move[0]
         array_position_2 = converted_move[1]
-        
+
         if ship_coordinates(converted_move, ship_coordinates)
           coordinates_list -= 1
           latest_hit_grid = @grid.mark_ship_hit(grid, array_position_1, array_position_2)

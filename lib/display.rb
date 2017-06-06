@@ -15,7 +15,6 @@ class Display
     grid = grid.draw_grid(number)
 
     @output.puts letters
-
     formatted_grid = grid.map do |row|
       row.join(" ") + "\n"
     end
