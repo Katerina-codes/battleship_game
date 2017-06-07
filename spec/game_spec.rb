@@ -6,6 +6,7 @@ describe Game do
   let(:grid) { Grid.new }
   let(:move_validator) { MoveValidator.new }
   let(:player_without_input) { Player.new }
+  let(:converter) { Converter.new }
 
   it "Displays the grid and letter to the player" do
     player = player_with_input("1\na")
@@ -115,7 +116,7 @@ describe Game do
     end
 
     def new_game_instance(player)
-      Game.new(display, player, grid, move_validator)
+      Game.new(display, player, grid, move_validator, converter)
     end
 
 end

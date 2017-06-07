@@ -1,4 +1,3 @@
-require_relative 'grid'
 require_relative 'converter'
 
 class Display
@@ -7,11 +6,9 @@ class Display
     @output = output
   end
 
-  def display_grid(grid_size, new_grid_instance)
-    converter = Converter.new
-
-    letters = converter.number_to_letters(grid_size)
-    grid = new_grid_instance.draw_grid(grid_size, new_grid_instance)
+  def display_grid(grid_size, grid_instance, converter_instance)
+    letters = converter_instance.number_to_letters(grid_size)
+    grid = grid_instance.draw_grid(grid_size)
 
     @output.puts letters
     formatted_grid = grid.map do |row|

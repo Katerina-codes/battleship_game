@@ -1,6 +1,6 @@
 class Grid
 
-  def draw_grid(grid_size, new_grid_instance)
+  def draw_grid(grid_size)
     Array.new(grid_size) { Array.new(grid_size, ".") }
   end
 

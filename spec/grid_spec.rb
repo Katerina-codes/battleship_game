@@ -4,17 +4,17 @@ describe Grid do
   let(:Grid) { Grid.new }
 
   it "draws a grid thats 1 by 1" do
-    expect(subject.draw_grid(1, subject)).to eq([["."]])
+    expect(subject.draw_grid(1)).to eq([["."]])
   end
 
   it "draws a grid thats 2 by 2" do
-    expect(subject.draw_grid(2, subject)).to eq(
+    expect(subject.draw_grid(2)).to eq(
 [[".", "."],
 [".", "."]])
   end
 
   it "marks first position on the grid" do
-    grid = subject.draw_grid(2, subject)
+    grid = subject.draw_grid(2)
     x_coordinate = 0
     y_coordinate = 0
     mark = "X"
@@ -30,7 +30,7 @@ describe Grid do
   end
 
   it "marks second position on the grid" do
-    grid = subject.draw_grid(2, subject)
+    grid = subject.draw_grid(2)
     x_coordinate = 0
     y_coordinate = 1
     mark = "X"
@@ -50,7 +50,7 @@ describe Grid do
   end
 
   it "marks a ship hit on the grid" do
-    grid = subject.draw_grid(1, subject)
+    grid = subject.draw_grid(1)
     x_coordinate = 0
     y_coordinate = 0
 
@@ -64,7 +64,7 @@ describe Grid do
   end
 
   it "marks another ship hit on the grid" do
-    grid = subject.draw_grid(1, subject)
+    grid = subject.draw_grid(1)
     x_coordinate = 0
     y_coordinate = 1
 

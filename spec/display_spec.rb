@@ -6,7 +6,8 @@ describe Display do
 
   it "displays grid of 1 by 1 with letter A" do
     grid = Grid.new
-    display.display_grid(1, grid)
+    converter = Converter.new
+    display.display_grid(1, grid, converter)
     expect(output.string).to include(" A ", ".")
   end
 

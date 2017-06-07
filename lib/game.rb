@@ -6,11 +6,12 @@ require_relative 'move_validator'
 
 class Game
 
-  def initialize(display, player, grid, move_validator)
+  def initialize(display, player, grid, move_validator, converter)
     @display = display
     @player = player
     @grid = grid
     @move_validator = move_validator
+    @converter = converter
   end
 
   def only_get_valid_letters
@@ -48,19 +49,19 @@ class Game
   end
 
   def convert_move(x_coordinate, y_coordinate)
-    converter = Converter.new
-    array_position_1 = converter.number_to_array_position(x_coordinate)
-    array_position_2 = converter.letter_to_array_position(y_coordinate)
+    array_position_1 = @converter.number_to_array_position(x_coordinate)
+    array_position_2 = @converter.letter_to_array_position(y_coordinate)
     [array_position_1, array_position_2]
   end
 
   def game_flow(grid_size, ship_coordinates)
     grid_instance = @grid
-    grid = @grid.draw_grid(grid_size, grid_instance)
+    converter_instance = @converter
+    grid = @grid.draw_grid(grid_size)
     mark = "X"
     past_moves = []
     coordinates_list = ship_coordinates.length
-    @display.display_grid(grid_size, grid_instance)
+    @display.display_grid(grid_size, grid_instance, converter_instance)
 
     until coordinates_list == 0
       move = new_move
