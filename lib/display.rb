@@ -7,7 +7,7 @@ class Display
     @output = output
   end
 
-  def display_grid(number)
+  def display_grid(grid_size)
     grid = Grid.new
     converter = Converter.new
 
