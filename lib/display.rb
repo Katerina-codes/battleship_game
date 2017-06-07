@@ -1,5 +1,3 @@
-require_relative 'converter'
-
 class Display
 
   def initialize(output = $stdout)
