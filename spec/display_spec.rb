@@ -5,7 +5,8 @@ describe Display do
   let(:display) { Display.new(output) }
 
   it "displays grid of 1 by 1 with letter A" do
-    display.display_grid(1)
+    grid = Grid.new
+    display.display_grid(1, grid)
     expect(output.string).to include(" A ", ".")
   end
 

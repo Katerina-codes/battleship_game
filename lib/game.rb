@@ -55,11 +55,12 @@ class Game
   end
 
   def game_flow(grid_size, ship_coordinates)
-    grid = @grid.draw_grid(grid_size)
+    grid_instance = @grid
+    grid = @grid.draw_grid(grid_size, grid_instance)
     mark = "X"
     past_moves = []
     coordinates_list = ship_coordinates.length
-    @display.display_grid(grid_size)
+    @display.display_grid(grid_size, grid_instance)
 
     until coordinates_list == 0
       move = new_move

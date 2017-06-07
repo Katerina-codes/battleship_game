@@ -7,12 +7,11 @@ class Display
     @output = output
   end
 
-  def display_grid(grid_size)
-    grid = Grid.new
+  def display_grid(grid_size, new_grid_instance)
     converter = Converter.new
 
-    letters = converter.number_to_letters(number)
-    grid = grid.draw_grid(number)
+    letters = converter.number_to_letters(grid_size)
+    grid = new_grid_instance.draw_grid(grid_size, new_grid_instance)
 
     @output.puts letters
     formatted_grid = grid.map do |row|
