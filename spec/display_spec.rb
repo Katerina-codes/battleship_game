@@ -13,7 +13,7 @@ describe Display do
 
   it "Asks the player for a number coordinate" do
     display.ask_for_number
-    expect(output.string).to eq("Time to make a move. Please enter a number from 1 - 10\n")
+    expect(output.string).to include("Time to make a move. Please enter a number from 1 - 10\n")
   end
 
   it "Asks the player for a letter" do
