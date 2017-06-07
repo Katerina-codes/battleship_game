@@ -17,19 +17,7 @@ class Converter
   end
 
   def number_to_array_position(number)
-    number_converter = {
-      "1" => 0,
-      "2" => 1,
-      "3" => 2,
-      "4" => 3,
-      "5" => 4,
-      "6" => 5,
-      "7" => 6,
-      "8" => 7,
-      "9" => 8,
-      "10" => 9
-    }
-    number_converter[number]
+    number.to_i - 1
   end
 
   def letter_to_array_position(letter)
