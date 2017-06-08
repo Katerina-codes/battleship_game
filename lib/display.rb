@@ -57,10 +57,17 @@ class Display
       @input.gets.chomp.downcase
     end
 
-    def get_ships_coordinates
+    def get_ships_coordinates(coordinates = [])
+      p coordinates
       number_coordinate = @input.gets.chomp.to_i
       letter_coordinate = @input.gets.chomp
-      [[number_coordinate, letter_coordinate]]
+      ship = [number_coordinate, letter_coordinate]
+      if coordinates.include?(ship)
+        @output.puts "You have entered this coordinate already"
+      else
+        coordinates.push(ship)
+      end
+        coordinates
     end
 
 

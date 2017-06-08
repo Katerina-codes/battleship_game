@@ -56,4 +56,11 @@ describe Display do
       expect(display.get_ships_coordinates).to eq([[1, "a"]])
     end
 
+    it "displays error message if coordinate is repeated" do
+      input = StringIO.new("1\na\n1\na")
+      display = Display.new(output, input)
+      display.get_ships_coordinates([[1, "a"]])
+      expect(output.string).to eq("You have entered this coordinate already\n")
+    end
+
 end
