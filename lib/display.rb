@@ -30,6 +30,10 @@ class Display
       @output.puts "This move has been entered before, enter another one!"
     end
 
+    def display_place_ships_message
+      @output.puts "Please place your ships in preparation for battle"
+    end
+
     def display_lastest_grid(grid, number)
       converter = Converter.new
 

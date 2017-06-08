@@ -31,4 +31,9 @@ describe Display do
     expect(output.string).to eq("This move has been entered before, enter another one!\n")
   end
 
+  it "displays 'Please place your ships in preparation for battle'" do
+    display.display_place_ships_message
+    expect(output.string).to eq("Please place your ships in preparation for battle\n")
+  end
+
 end
