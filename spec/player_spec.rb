@@ -14,4 +14,10 @@ describe Player do
     expect(player.get_letter_coordinate).to eq("a")
   end
 
+  it "gets 1 unique coordinate" do
+    input = StringIO.new("1\na")
+    player = Player.new(input)
+    expect(player.get_ships_coordinates).to eq([[1, "a"]])
+  end
+
 end

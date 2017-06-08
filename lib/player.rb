@@ -12,4 +12,10 @@ class Player
     @input.gets.chomp.downcase
   end
 
+  def get_ships_coordinates
+    number_coordinate = @input.gets.chomp.to_i
+    letter_coordinate = @input.gets.chomp
+    [[number_coordinate, letter_coordinate]]
+  end
+
 end
