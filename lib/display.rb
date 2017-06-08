@@ -1,7 +1,8 @@
 class Display
 
-  def initialize(output = $stdout)
+  def initialize(output = $stdout, input = $stdin)
     @output = output
+    @input = input
   end
 
   def display_grid(grid_size, grid_instance, converter_instance)
@@ -34,10 +35,9 @@ class Display
       @output.puts "Please place your ships in preparation for battle"
     end
 
-    def display_lastest_grid(grid, number)
-      converter = Converter.new
+    def display_lastest_grid(grid, number, converter_instance)
 
-      letters = converter.number_to_letters(number)
+      letters = converter_instance.number_to_letters(number)
       @output.puts letters
 
       formatted_grid = grid.map do |row|
@@ -48,5 +48,20 @@ class Display
         @output.print (index + 1).to_s + " ", row
       end
     end
+
+    def get_number_coordinate
+      @input.gets.chomp
+    end
+
+    def get_letter_coordinate
+      @input.gets.chomp.downcase
+    end
+
+    def get_ships_coordinates
+      number_coordinate = @input.gets.chomp.to_i
+      letter_coordinate = @input.gets.chomp
+      [[number_coordinate, letter_coordinate]]
+    end
+
 
 end

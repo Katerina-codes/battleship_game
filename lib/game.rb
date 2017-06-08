@@ -15,19 +15,19 @@ class Game
   end
 
   def only_get_valid_letters
-    letter = @player.get_letter_coordinate
+    letter = @display.get_letter_coordinate
     until @move_validator.is_letter_valid?(letter)
       @display.ask_for_letter
-      letter = @player.get_letter_coordinate
+      letter = @display.get_letter_coordinate
     end
     letter
   end
 
   def only_get_valid_numbers
-    number = @player.get_number_coordinate
+    number = @display.get_number_coordinate
     until @move_validator.is_number_valid?(number)
       @display.ask_for_number
-      number = @player.get_number_coordinate
+      number = @display.get_number_coordinate
     end
     number
   end
@@ -62,6 +62,7 @@ class Game
     past_moves = []
     coordinates_list = ship_coordinates.length
     @display.display_grid(grid_size, grid_instance, converter_instance)
+    @display.display_place_ships_message
 
     until coordinates_list == 0
       move = new_move
@@ -79,10 +80,10 @@ class Game
         if ship_coordinates(converted_move, ship_coordinates)
           coordinates_list -= 1
           latest_hit_grid = @grid.mark_ship_hit(grid, array_position_1, array_position_2)
-          @display.display_lastest_grid(latest_hit_grid, grid_size)
+          @display.display_lastest_grid(latest_hit_grid, grid_size, converter_instance)
         else
           latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
-          @display.display_lastest_grid(latest_grid, grid_size)
+          @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
         end
       end
     end
