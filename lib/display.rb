@@ -60,7 +60,9 @@ class Display
     def get_ships_coordinates(number, converter_instance)
       coordinates = []
       until number == 0
+        @output.puts "Please enter a number"
         number_coordinate = @input.gets.chomp.to_i
+        @output.puts "Please enter a letter"
         letter_coordinate = @input.gets.chomp
 
         converted_number_coord = converter_instance.number_to_array_position(number_coordinate)
@@ -75,6 +77,24 @@ class Display
         end
       end
       coordinates
+    end
+
+    def only_get_valid_letters(move_validator_instance)
+      letter = get_letter_coordinate
+      until move_validator_instance.is_letter_valid?(letter)
+        ask_for_letter
+        letter = get_letter_coordinate
+      end
+      letter
+    end
+
+    def only_get_valid_numbers(move_validator_instance)
+      number = get_number_coordinate
+      until move_validator_instance.is_number_valid?(number)
+        ask_for_number
+        number = get_number_coordinate
+      end
+      number
     end
 
 end

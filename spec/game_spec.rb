@@ -31,23 +31,23 @@ describe Game do
     expect(output.string).to include("A", "B", "1", "2", ".", ".", "/", "X")
   end
 
-  it "prompts for a letter until it's in the range of A - J" do
-    input = StringIO.new("K\na")
-    display = Display.new(output, input)
-    game = new_game_instance(display)
-
-    game.only_get_valid_letters
-
-    expect(output.string).to eq("Please enter a letter from A - J\n")
-  end
-
-  it "returns the letter if it's inside the range" do
-    input = StringIO.new("a")
-    display = Display.new(output, input)
-    game = new_game_instance(display)
-
-    expect(game.only_get_valid_letters).to eq("a")
-  end
+  # it "prompts for a letter until it's in the range of A - J" do
+  #   input = StringIO.new("K\na")
+  #   display = Display.new(output, input)
+  #   game = new_game_instance(display)
+  #
+  #   game.only_get_valid_letters
+  #
+  #   expect(output.string).to eq("Please enter a letter from A - J\n")
+  # end
+  #
+  # it "returns the letter if it's inside the range" do
+  #   input = StringIO.new("a")
+  #   display = Display.new(output, input)
+  #   game = new_game_instance(display)
+  #
+  #   expect(game.only_get_valid_letters).to eq("a")
+  # end
 
   it "Returns true if move has been played before" do
     display = Display.new
@@ -68,25 +68,25 @@ describe Game do
 
     expect(game.move_played_before?(move, past_moves)).to eq(false)
   end
-
-  it "prompts for a number until it's in the range of 1 - 10" do
-    input = StringIO.new("11\n3")
-    display = Display.new(output, input)
-    game = new_game_instance(display)
-
-    game.only_get_valid_numbers
-
-    expect(output.string).to eq("Time to make a move. Please enter a number from 1 - 10\n")
-  end
-
-  it "returns the number if a valid number is entered" do
-    input = StringIO.new("1")
-    display = Display.new(output, input)
-
-    game = new_game_instance(display)
-
-    expect(game.only_get_valid_numbers).to eq("1")
-  end
+  #
+  # it "prompts for a number until it's in the range of 1 - 10" do
+  #   input = StringIO.new("11\n3")
+  #   display = Display.new(output, input)
+  #   game = new_game_instance(display)
+  #
+  #   game.only_get_valid_numbers
+  #
+  #   expect(output.string).to eq("Time to make a move. Please enter a number from 1 - 10\n")
+  # end
+  #
+  # it "returns the number if a valid number is entered" do
+  #   input = StringIO.new("1")
+  #   display = Display.new(output, input)
+  #
+  #   game = new_game_instance(display)
+  #
+  #   expect(game.only_get_valid_numbers).to eq("1")
+  # end
 
   it "Returns true if move is present in the ship coordinates array" do
     display = Display.new

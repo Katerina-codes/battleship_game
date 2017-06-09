@@ -14,23 +14,23 @@ class Game
     @converter = converter
   end
 
-  def only_get_valid_letters
-    letter = @display.get_letter_coordinate
-    until @move_validator.is_letter_valid?(letter)
-      @display.ask_for_letter
-      letter = @display.get_letter_coordinate
-    end
-    letter
-  end
-
-  def only_get_valid_numbers
-    number = @display.get_number_coordinate
-    until @move_validator.is_number_valid?(number)
-      @display.ask_for_number
-      number = @display.get_number_coordinate
-    end
-    number
-  end
+  # def only_get_valid_letters
+  #   letter = @display.get_letter_coordinate
+  #   until @move_validator.is_letter_valid?(letter)
+  #     @display.ask_for_letter
+  #     letter = @display.get_letter_coordinate
+  #   end
+  #   letter
+  # end
+  #
+  # def only_get_valid_numbers
+  #   number = @display.get_number_coordinate
+  #   until @move_validator.is_number_valid?(number)
+  #     @display.ask_for_number
+  #     number = @display.get_number_coordinate
+  #   end
+  #   number
+  # end
 
   def move_played_before?(move, past_moves)
     past_moves.include?(move)
@@ -42,9 +42,9 @@ class Game
 
   def new_move
     @display.ask_for_number
-    x_coordinate = only_get_valid_numbers
+    x_coordinate = @display.only_get_valid_numbers(@move_validator)
     @display.ask_for_letter
-    y_coordinate = only_get_valid_letters
+    y_coordinate = @display.only_get_valid_letters(@move_validator)
     [x_coordinate, y_coordinate]
   end
 
