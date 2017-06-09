@@ -8,11 +8,11 @@ describe Game do
   let(:converter) { Converter.new }
 
   it "Displays the grid and letter to the player" do
-    input = StringIO.new("1\na")
+    input = StringIO.new("1\na\n1\na")
     display = Display.new(output, input)
     game = new_game_instance(display)
     grid_size = 1
-    ship_coordinates = [[0, 0]]
+    ship_coordinates = 1
 
     game.game_flow(grid_size, ship_coordinates)
 
@@ -20,13 +20,13 @@ describe Game do
   end
 
   it "Updates the grid with a marked position" do
-    input = StringIO.new("2\nB\b2\na\n1\nb")
+    input = StringIO.new("1\nb\n2\nB\b2\na\n1\nb")
     display = Display.new(output, input)
     game = new_game_instance(display)
     grid_size = 2
-    ship_coordinates = [[0, 1]]
+    number_of_coordinates = 1
 
-    game.game_flow(grid_size, ship_coordinates)
+    game.game_flow(grid_size, number_of_coordinates)
 
     expect(output.string).to include("A", "B", "1", "2", ".", ".", "/", "X")
   end
@@ -97,29 +97,30 @@ describe Game do
 
     it "Returns false if move is not present in the ship coordinates array" do
       display = Display.new
+
       game = new_game_instance(display)
 
       expect(game.ship_coordinates([9, 1],[[9, 2]])).to eq(false)
     end
 
     it "marks ships and normal positions on the grid" do
-      input = StringIO.new("1\na\n2\nc\n1\nb")
+      input = StringIO.new("1\na\n2\nc\n1\na\n1\nb\n2\nc")
       display = Display.new(output, input)
       game = new_game_instance(display)
       grid_size = 3
-      ship_coordinates = [[0, 1], [1, 2]]
+      number_of_coordinates = 2
 
-      expect(game.game_flow(grid_size, ship_coordinates)).to include(["X", "/", "."], [".", ".", "/"])
+      expect(game.game_flow(grid_size, number_of_coordinates)).to include(["/", "X", "."], [".", ".", "/"])
     end
 
     it "does not reset the board if a player enters a move twice" do
-      input = StringIO.new("1\na\n1\na\n1\nb")
+      input = StringIO.new("1\na\n1\nb\n1\na\n1\na\n1\nb")
       display = Display.new(output, input)
       game = new_game_instance(display)
       grid_size = 2
-      ship_coordinates = [[0, 0], [0, 1]]
+      number_of_coordinates = 2
 
-      expect(game.game_flow(grid_size, ship_coordinates)).to eq([["/", "/"],[".", "."]])
+      expect(game.game_flow(grid_size, number_of_coordinates)).to eq([["/", "/"],[".", "."]])
     end
 
     def new_game_instance(display)

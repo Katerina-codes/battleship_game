@@ -57,18 +57,24 @@ class Display
       @input.gets.chomp.downcase
     end
 
-    def get_ships_coordinates(coordinates = [])
-      p coordinates
-      number_coordinate = @input.gets.chomp.to_i
-      letter_coordinate = @input.gets.chomp
-      ship = [number_coordinate, letter_coordinate]
-      if coordinates.include?(ship)
-        @output.puts "You have entered this coordinate already"
-      else
-        coordinates.push(ship)
-      end
-        coordinates
-    end
+    def get_ships_coordinates(number, converter_instance)
+      coordinates = []
+      until number == 0
+        number_coordinate = @input.gets.chomp.to_i
+        letter_coordinate = @input.gets.chomp
 
+        converted_number_coord = converter_instance.number_to_array_position(number_coordinate)
+        converted_letter_coord = converter_instance.letter_to_array_position(letter_coordinate)
+
+        ship = [converted_number_coord, converted_letter_coord]
+        if coordinates.include?(ship)
+          @output.puts "You have entered this coordinate already"
+        else
+          coordinates.push(ship)
+          number -= 1
+        end
+      end
+      coordinates
+    end
 
 end

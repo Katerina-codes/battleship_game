@@ -53,14 +53,14 @@ describe Display do
     it "gets 1 unique coordinate" do
       input = StringIO.new("1\na")
       display = Display.new(output, input)
-      expect(display.get_ships_coordinates).to eq([[1, "a"]])
+      expect(display.get_ships_coordinates(1, converter)).to eq([[0, 0]])
     end
 
     it "displays error message if coordinate is repeated" do
-      input = StringIO.new("1\na\n1\na")
+      input = StringIO.new("1\na\n1\na\n1\nb\n")
       display = Display.new(output, input)
-      display.get_ships_coordinates([[1, "a"]])
-      expect(output.string).to eq("You have entered this coordinate already\n")
+      display.get_ships_coordinates(2, converter)
+      expect(output.string).to include("You have entered this coordinate already\n")
     end
 
 end

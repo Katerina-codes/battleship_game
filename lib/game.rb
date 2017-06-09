@@ -54,15 +54,17 @@ class Game
     [array_position_1, array_position_2]
   end
 
-  def game_flow(grid_size, ship_coordinates)
+  def game_flow(grid_size, number_of_coordinates)
     grid_instance = @grid
     converter_instance = @converter
     grid = @grid.draw_grid(grid_size)
     mark = "X"
     past_moves = []
-    coordinates_list = ship_coordinates.length
+    coordinates_list = number_of_coordinates
+
     @display.display_grid(grid_size, grid_instance, converter_instance)
     @display.display_place_ships_message
+    ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
 
     until coordinates_list == 0
       move = new_move
