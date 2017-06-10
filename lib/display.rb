@@ -58,12 +58,14 @@ class Display
     end
 
     def get_ships_coordinates(number, converter_instance)
+      move_validator_instance = MoveValidator.new
+
       coordinates = []
       until number == 0
         @output.puts "Please enter a number"
-        number_coordinate = @input.gets.chomp.to_i
+        number_coordinate = only_get_valid_numbers(move_validator_instance)
         @output.puts "Please enter a letter"
-        letter_coordinate = @input.gets.chomp
+        letter_coordinate = only_get_valid_letters(move_validator_instance)
 
         converted_number_coord = converter_instance.number_to_array_position(number_coordinate)
         converted_letter_coord = converter_instance.letter_to_array_position(letter_coordinate)

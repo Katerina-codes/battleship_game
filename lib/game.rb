@@ -14,24 +14,6 @@ class Game
     @converter = converter
   end
 
-  # def only_get_valid_letters
-  #   letter = @display.get_letter_coordinate
-  #   until @move_validator.is_letter_valid?(letter)
-  #     @display.ask_for_letter
-  #     letter = @display.get_letter_coordinate
-  #   end
-  #   letter
-  # end
-  #
-  # def only_get_valid_numbers
-  #   number = @display.get_number_coordinate
-  #   until @move_validator.is_number_valid?(number)
-  #     @display.ask_for_number
-  #     number = @display.get_number_coordinate
-  #   end
-  #   number
-  # end
-
   def move_played_before?(move, past_moves)
     past_moves.include?(move)
   end
@@ -45,7 +27,7 @@ class Game
     x_coordinate = @display.only_get_valid_numbers(@move_validator)
     @display.ask_for_letter
     y_coordinate = @display.only_get_valid_letters(@move_validator)
-    [x_coordinate, y_coordinate]
+    convert_move(x_coordinate, y_coordinate)
   end
 
   def convert_move(x_coordinate, y_coordinate)
@@ -68,23 +50,20 @@ class Game
 
     until coordinates_list == 0
       move = new_move
-      x_coordinate = move[0]
-      y_coordinate = move[1]
+      letter_coordinate = move[0]
+      number_coordinate = move[1]
 
       if move_played_before?(move, past_moves)
         @display.display_repeated_move_error
       else
         past_moves.push(move)
-        converted_move = convert_move(x_coordinate, y_coordinate)
-        array_position_1 = converted_move[0]
-        array_position_2 = converted_move[1]
 
-        if ship_coordinates(converted_move, ship_coordinates)
+        if ship_coordinates(move, ship_coordinates)
           coordinates_list -= 1
-          latest_hit_grid = @grid.mark_ship_hit(grid, array_position_1, array_position_2)
+          latest_hit_grid = @grid.mark_ship_hit(grid, letter_coordinate, number_coordinate)
           @display.display_lastest_grid(latest_hit_grid, grid_size, converter_instance)
         else
-          latest_grid = @grid.mark_position(grid, array_position_1, array_position_2, mark)
+          latest_grid = @grid.mark_position(grid, letter_coordinate, number_coordinate, mark)
           @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
         end
       end
