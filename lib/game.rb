@@ -50,8 +50,8 @@ class Game
 
     until coordinates_list == 0
       move = new_move
-      letter_coordinate = move[0]
-      number_coordinate = move[1]
+      number_coordinate = move[0]
+      letter_coordinate = move[1]
 
       if move_played_before?(move, past_moves)
         @display.display_repeated_move_error
@@ -60,10 +60,10 @@ class Game
 
         if ship_coordinates(move, ship_coordinates)
           coordinates_list -= 1
-          latest_hit_grid = @grid.mark_ship_hit(grid, letter_coordinate, number_coordinate)
+          latest_hit_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
           @display.display_lastest_grid(latest_hit_grid, grid_size, converter_instance)
         else
-          latest_grid = @grid.mark_position(grid, letter_coordinate, number_coordinate, mark)
+          latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, mark)
           @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
         end
       end
