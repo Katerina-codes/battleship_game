@@ -18,12 +18,12 @@ describe MoveValidator do
     expect(subject.is_letter_valid?("k")).to eq(false)
   end
 
-it "does not allow more than one character to be entered" do
-  expect(subject.is_number_valid?("4d")).to eq(false)
-end
+  it "does not allow more than one character to be entered" do
+    expect(subject.is_number_valid?("4d")).to eq(false)
+  end
 
-it "returns true for two consecutive numbers and letters" do
-  expect(subject.is_ship_valid?([[1, "a"], [2, "a"]])). to eq(true)
-end
+  it "returns valid for two consecutive numbers and letter" do
+    expect(subject.is_ship_valid?([[1, "a"], [2, "a"]])). to eq(true)
+  end
 
 end
