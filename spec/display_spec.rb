@@ -97,5 +97,4 @@ describe Display do
         expect(display.only_get_valid_letters(MoveValidator.new)).to eq("a")
       end
 
-
 end

@@ -12,9 +12,5 @@ class MoveValidator
     range = ("a".."j").to_a
     range.include?(letter)
   end
-
-  def is_ship_valid?(ship_coordinates)
-    true
-  end
-
+  
 end
