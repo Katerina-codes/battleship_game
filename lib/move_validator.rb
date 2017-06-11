@@ -13,4 +13,8 @@ class MoveValidator
     range.include?(letter)
   end
 
+  def is_ship_valid?(ship_coordinates)
+    true
+  end
+
 end
