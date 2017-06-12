@@ -69,8 +69,8 @@ class Display
 
         converted_number_coord = converter_instance.number_to_array_position(number_coordinate)
         converted_letter_coord = converter_instance.letter_to_array_position(letter_coordinate)
-
         ship = [converted_number_coord, converted_letter_coord]
+
         if coordinates.include?(ship)
           @output.puts "You have entered this coordinate already"
         else
