@@ -52,7 +52,10 @@ class Game
     coordinates_list = number_of_coordinates
 
     ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
-    get_initial_board = board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
+    p1_initial_board = board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
+
+    ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
+    p2_initial_board = board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
 
     until coordinates_list == 0
       move = new_move

@@ -8,7 +8,7 @@ describe Game do
   let(:converter) { Converter.new }
 
   it "Displays the grid and letter to the player" do
-    input = StringIO.new("1\na\n1\na")
+    input = StringIO.new("1\na\n1\nb\n1\na\n1\nb")
     display = Display.new(output, input)
     game = new_game_instance(display)
     grid_size = 1
@@ -20,7 +20,7 @@ describe Game do
   end
 
   it "Updates the grid with a marked position" do
-    input = StringIO.new("1\nb\n2\nB\b2\na\n1\nb")
+    input = StringIO.new("1\nb\n2\nd\n2\nb\n1\nb\n2\nd")
     display = Display.new(output, input)
     game = new_game_instance(display)
     grid_size = 2
