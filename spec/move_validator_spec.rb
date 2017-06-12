@@ -21,5 +21,4 @@ describe MoveValidator do
   it "does not allow more than one character to be entered" do
     expect(subject.is_number_valid?("4d")).to eq(false)
   end
-
 end

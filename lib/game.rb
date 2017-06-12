@@ -48,6 +48,11 @@ class Game
     @display.display_place_ships_message
     ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
 
+    my_board = ship_coordinates.each do |x, y|
+      my_ships = @grid.mark_position(grid, x, y, "O")
+      @display.display_lastest_grid(my_ships, grid_size, converter_instance)
+    end
+
     until coordinates_list == 0
       move = new_move
       number_coordinate = move[0]
