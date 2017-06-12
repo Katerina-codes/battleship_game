@@ -37,7 +37,7 @@ class Game
   end
 
   def board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
-    ship_coordinates.each do |x, y|
+    ship_coordinates.map do |x, y|
       my_ships = @grid.mark_position(grid, x, y, "O")
       @display.display_lastest_grid(my_ships, grid_size, converter_instance)
     end
@@ -47,15 +47,15 @@ class Game
     grid_instance = @grid
     converter_instance = @converter
     grid = @grid.draw_grid(grid_size)
+    enemy_grid = @grid.draw_grid(grid_size)
     mark = "X"
     past_moves = []
     coordinates_list = number_of_coordinates
 
     ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
-    p1_initial_board = board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
+    p1_board = board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
 
-    ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
-    p2_initial_board = board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
+    p2_initial_board = @display.display_grid(grid_size, grid_instance, converter_instance)
 
     until coordinates_list == 0
       move = new_move
@@ -69,10 +69,10 @@ class Game
 
         if ship_coordinates(move, ship_coordinates)
           coordinates_list -= 1
-          latest_hit_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
+          latest_hit_grid = @grid.mark_ship_hit(enemy_grid, number_coordinate, letter_coordinate)
           @display.display_lastest_grid(latest_hit_grid, grid_size, converter_instance)
         else
-          latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, mark)
+          latest_grid = @grid.mark_position(enemy_grid, number_coordinate, letter_coordinate, mark)
           @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
         end
       end
