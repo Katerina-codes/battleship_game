@@ -36,6 +36,13 @@ class Game
     [array_position_1, array_position_2]
   end
 
+  def board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
+    ship_coordinates.each do |x, y|
+      my_ships = @grid.mark_position(grid, x, y, "O")
+      @display.display_lastest_grid(my_ships, grid_size, converter_instance)
+    end
+  end
+
   def game_flow(grid_size, number_of_coordinates)
     grid_instance = @grid
     converter_instance = @converter
@@ -44,14 +51,8 @@ class Game
     past_moves = []
     coordinates_list = number_of_coordinates
 
-    @display.display_grid(grid_size, grid_instance, converter_instance)
-    @display.display_place_ships_message
     ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
-
-    my_board = ship_coordinates.each do |x, y|
-      my_ships = @grid.mark_position(grid, x, y, "O")
-      @display.display_lastest_grid(my_ships, grid_size, converter_instance)
-    end
+    get_initial_board = board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
 
     until coordinates_list == 0
       move = new_move
