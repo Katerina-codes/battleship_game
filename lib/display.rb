@@ -62,9 +62,9 @@ class Display
 
       coordinates = []
       until number == 0
-        @output.puts "Please enter a number"
+        @output.puts "Please enter a number coordinate for your ship"
         number_coordinate = only_get_valid_numbers(move_validator_instance)
-        @output.puts "Please enter a letter"
+        @output.puts "Please enter a letter coordinate for your ship"
         letter_coordinate = only_get_valid_letters(move_validator_instance)
 
         converted_number_coord = converter_instance.number_to_array_position(number_coordinate)
