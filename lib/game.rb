@@ -36,62 +36,55 @@ class Game
     [array_position_1, array_position_2]
   end
 
-  def board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance)
+  def board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance, mark)
     ship_coordinates.map do |x, y|
-      my_ships = @grid.mark_position(grid, x, y, "O")
+      my_ships = @grid.mark_position(grid, x, y, mark)
       @display.display_lastest_grid(my_ships, grid_size, converter_instance)
+      my_ships
     end
   end
 
-  def play_until_winner_is_found(grid, ship_coordinates, converter_instance, grid_size)
+  def play_until_winner_is_found(coordinates_list, grid, ship_coordinates, converter_instance, grid_size)
     past_moves = []
-    mark = "X"
-    # until coordinates_list == 0
+    #until coordinates_list == 0
       move = new_move
       number_coordinate = move[0]
       letter_coordinate = move[1]
 
       if move_played_before?(move, past_moves)
+       p "should prompt for move again"
         @display.display_repeated_move_error
+        play_until_winner_is_found(coordinates_list, grid, ship_coordinates, converter_instance, grid_size)
       else
-        past_moves.push(move)
+        past_moves = past_moves.push(move)
 
         if ship_coordinates(move, ship_coordinates)
-          # coordinates_list -= 1
-          p2_latest_hit_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
-          @display.display_lastest_grid(p2_latest_hit_grid, grid_size, converter_instance)
-          #
-          # p1_latest_grid = @grid.mark_ship_hit(p1_board, number_coordinate, letter_coordinate)
-          # @display.display_lastest_grid(p1_latest_grid, grid_size, converter_instance)
+          coordinates_list -= 1
+          latest_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
+          @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
         else
-          p2_latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, mark)
-          @display.display_lastest_grid(p2_latest_grid, grid_size, converter_instance)
-          #
-          # p1_latest_grid = @grid.mark_ship_hit(p1_board, number_coordinate, letter_coordinate)
-          # @display.display_lastest_grid(p1_latest_grid, grid_size, converter_instance)
+          latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "X")
+          @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
         end
       end
-    # end
-    p2_latest_hit_grid
+    latest_grid
   end
 
   def game_flow(grid_size, number_of_coordinates)
     grid_instance = @grid
     converter_instance = @converter
-    enemy_grid = @grid.draw_grid(grid_size)
     mark = "X"
     past_moves = []
     coordinates_list = number_of_coordinates
 
     p1_grid = @grid.draw_grid(grid_size)
     p1_ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
-    p1_board = board_with_ship_coordinates(grid_size, p1_grid, p1_ship_coordinates, converter_instance)
+    p1_board = board_with_ship_coordinates(grid_size, p1_grid, p1_ship_coordinates, converter_instance, "O")
 
     p2_grid = @grid.draw_grid(grid_size)
     p2_ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
-    p2_board = board_with_ship_coordinates(grid_size, p2_grid, p2_ship_coordinates, converter_instance)
 
-    p2_grid = play_until_winner_is_found(p2_grid, p1_ship_coordinates, converter_instance, grid_size)
-    p1_grid = play_until_winner_is_found(p1_grid, p1_ship_coordinates, converter_instance, grid_size)
+      p2_grid = play_until_winner_is_found(coordinates_list, p2_grid, p2_ship_coordinates, converter_instance, grid_size)
+      p1_grid = play_until_winner_is_found(coordinates_list, p1_grid, p1_ship_coordinates, converter_instance, grid_size)
   end
 end
