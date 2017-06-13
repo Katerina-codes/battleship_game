@@ -46,27 +46,17 @@ class Game
 
   def play_until_winner_is_found(coordinates_list, grid, ship_coordinates, converter_instance, grid_size)
     past_moves = []
-    #until coordinates_list == 0
-      move = new_move
-      number_coordinate = move[0]
-      letter_coordinate = move[1]
+    move = new_move
+    number_coordinate = move[0]
+    letter_coordinate = move[1]
 
-      if move_played_before?(move, past_moves)
-       p "should prompt for move again"
-        @display.display_repeated_move_error
-        play_until_winner_is_found(coordinates_list, grid, ship_coordinates, converter_instance, grid_size)
-      else
-        past_moves = past_moves.push(move)
-
-        if ship_coordinates(move, ship_coordinates)
-          coordinates_list -= 1
-          latest_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
-          @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
-        else
-          latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "X")
-          @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
-        end
-      end
+    if ship_coordinates(move, ship_coordinates)
+      latest_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
+      @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
+    else
+      latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "X")
+      @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
+    end
     latest_grid
   end
 
@@ -83,8 +73,29 @@ class Game
 
     p2_grid = @grid.draw_grid(grid_size)
     p2_ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
+    @display.display_lastest_grid(p2_grid, grid_size, converter_instance)
 
+    p1_ship_hits = 0
+    p2_ship_hits = 0
+
+    until p1_ship_hits == coordinates_list || p2_ship_hits == coordinates_list
       p2_grid = play_until_winner_is_found(coordinates_list, p2_grid, p2_ship_coordinates, converter_instance, grid_size)
+      p1_array_of_hits = p2_grid.map do |element|
+        element.count("/")
+      end
+      p1_ship_hits = p1_array_of_hits.reduce(:+)
+
       p1_grid = play_until_winner_is_found(coordinates_list, p1_grid, p1_ship_coordinates, converter_instance, grid_size)
+      p2_array_of_hits = p1_grid.map do |element|
+        element.count("/")
+      end
+      p2_ship_hits = p2_array_of_hits.reduce(:+)
+    end
+
+    if p1_ship_hits == coordinates_list
+      p1_ship_hits
+    else
+      p2_ship_hits
+    end
   end
 end
