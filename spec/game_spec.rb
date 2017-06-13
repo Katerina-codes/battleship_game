@@ -67,7 +67,7 @@ describe Game do
     end
 
     it "marks ships and normal positions on the grid" do
-      input = StringIO.new("1\na\n2\nc\n3\nb\n3\nc\n3\nb\n1\na\n3\nc\n1\nb\n3\na\n2\nc")
+      input = StringIO.new("1\na\n2\nc\n3\nb\n3\nc\n3\nb\n1\na\n3\na\n1\nb\n3\nc\n2\nc")
       display = Display.new(output, input)
       game = new_game_instance(display)
       grid_size = 3

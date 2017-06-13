@@ -93,9 +93,9 @@ class Game
     end
 
     if p1_ship_hits == coordinates_list
-      p1_ship_hits
+      p1_grid
     else
-      p2_ship_hits
+      p2_grid
     end
   end
 end
