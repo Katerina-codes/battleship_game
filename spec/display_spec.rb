@@ -66,34 +66,34 @@ describe Display do
 
   it "prompts for a number until it's in the range of 1 - 10" do
     input = StringIO.new("11\n3")
-    display = Display.new(output, input)
 
-    display.only_get_valid_numbers(MoveValidator.new)
+    display_with_output_and_input(output, input).only_get_valid_numbers(MoveValidator.new)
 
     expect(output.string).to eq("Time to make a move. Please enter a number from 1 - 10\n")
   end
 
   it "returns the number if a valid number is entered" do
     input = StringIO.new("1")
-    display = Display.new(output, input)
 
-    expect(display.only_get_valid_numbers(MoveValidator.new)).to eq("1")
+    expect(display_with_output_and_input(output, input).only_get_valid_numbers(MoveValidator.new)).to eq("1")
   end
 
   it "prompts for a letter until it's in the range of A - J" do
     input = StringIO.new("K\na")
-    display = Display.new(output, input)
 
-    display.only_get_valid_letters(MoveValidator.new)
+    display_with_output_and_input(output, input).only_get_valid_letters(MoveValidator.new)
 
     expect(output.string).to eq("Please enter a letter from A - J\n")
   end
 
   it "returns the letter if it's inside the range" do
     input = StringIO.new("a")
-    display = Display.new(output, input)
 
-    expect(display.only_get_valid_letters(MoveValidator.new)).to eq("a")
+    expect(display_with_output_and_input(output, input).only_get_valid_letters(MoveValidator.new)).to eq("a")
+  end
+
+  def display_with_output_and_input(output, input)
+    Display.new(output, input)
   end
 
 end
