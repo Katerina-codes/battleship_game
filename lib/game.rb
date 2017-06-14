@@ -37,11 +37,11 @@ class Game
   end
 
   def board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance, mark)
+    my_ships = nil
     ship_coordinates.map do |x, y|
       my_ships = @grid.mark_position(grid, x, y, mark)
-      @display.display_lastest_grid(my_ships, grid_size, converter_instance)
-      my_ships
     end
+    @display.display_lastest_grid(my_ships, grid_size, converter_instance)
   end
 
   def play_until_winner_is_found(coordinates_list, grid, ship_coordinates, converter_instance, grid_size)
