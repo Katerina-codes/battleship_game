@@ -54,10 +54,11 @@ describe Grid do
     x_coordinate = 0
     y_coordinate = 0
 
-    new_grid = subject.mark_ship_hit(
+    new_grid = subject.mark_position(
                     grid,
                     x_coordinate,
                     y_coordinate,
+                    "/"
                   )
 
     expect(new_grid).to eq([["/"]])
@@ -68,10 +69,11 @@ describe Grid do
     x_coordinate = 0
     y_coordinate = 1
 
-    new_grid = subject.mark_ship_hit(
+    new_grid = subject.mark_position(
                     grid,
                     x_coordinate,
                     y_coordinate,
+                    "/"
                   )
 
     expect(new_grid).to eq([[".", "/"]])

@@ -51,7 +51,7 @@ class Game
     letter_coordinate = move[1]
 
     if ship_coordinates(move, ship_coordinates)
-      latest_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
+      latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "/")
       @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
     else
       latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "X")
