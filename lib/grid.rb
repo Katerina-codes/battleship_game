@@ -9,8 +9,4 @@ class Grid
     grid
   end
 
-  def is_mark_position_unique?(mark)
-    false
-  end
-
 end
