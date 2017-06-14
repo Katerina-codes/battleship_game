@@ -58,7 +58,7 @@ describe Display do
   end
 
   it "displays error message if coordinate is repeated" do
-    input = StringIO.new("1\na\n1\na\n1\nb\n")
+    input = StringIO.new("1\na\n1\na\n1\nb\n2\na\n2\nb")
     display = Display.new(output, input)
     display.get_ships_coordinates(2, converter)
     expect(output.string).to include("You have entered this coordinate already\n")

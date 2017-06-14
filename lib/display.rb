@@ -73,6 +73,7 @@ class Display
 
         if coordinates.include?(ship)
           @output.puts "You have entered this coordinate already"
+          get_ships_coordinates(number, converter_instance)
         else
           coordinates.push(ship)
           number -= 1
