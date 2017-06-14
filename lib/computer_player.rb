@@ -1,7 +1,7 @@
 class ComputerPlayer
 
   def play_move
-    "1b"
+    [0, 0]
   end
 
 end
