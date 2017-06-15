@@ -2,13 +2,7 @@ require 'computer_player'
 
 describe ComputerPlayer do
 
-  # it "returns [0, 0] if passed [0, 0]" do
-  #   grid_size = 1
-  #   computer = ComputerPlayer.new([0, 0])
-  #   expect(computer.play_move(1, grid_size)).to eq([[0, 0]])
-  # end
-
-  it "returns a random move if no move is passed" do
+  it "returns a random move" do
     grid_size = 2
     computer = ComputerPlayer.new
     ship_coordinates = computer.play_move(2, grid_size)
