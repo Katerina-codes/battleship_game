@@ -93,10 +93,10 @@ class Game
       if ship_coordinates(p2_move, p2_ship_coordinates)
         latest_grid = @grid.mark_position(p1_grid, number_coordinate, letter_coordinate, "/")
       else
-        number_coordinate
-        letter_coordinate
         latest_grid = @grid.mark_position(p1_grid, number_coordinate, letter_coordinate, "X")
       end
+
+      @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
 
       p1_grid = latest_grid
       p2_array_of_hits = p1_grid.map do |element|
