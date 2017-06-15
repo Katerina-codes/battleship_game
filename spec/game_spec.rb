@@ -2,6 +2,8 @@ require 'game'
 
 describe Game do
   let(:output) { StringIO.new }
+  let(:input) { StringIO.new }
+  let(:display) { Display.new(output, input) }
   let(:grid) { Grid.new }
   let(:move_validator) { MoveValidator.new }
   let(:player) { Player.new }
@@ -32,7 +34,6 @@ describe Game do
   end
 
   it "Returns true if move has been played before" do
-    display = Display.new
     game = new_game_instance(display)
 
     past_moves = [["1", "a"]]
@@ -42,7 +43,6 @@ describe Game do
   end
 
   it "Returns false if move hasn't been played before" do
-    display = Display.new
     game = new_game_instance(display)
 
     past_moves = [["1", "a"]]
@@ -52,15 +52,12 @@ describe Game do
   end
 
   it "Returns true if move is present in the ship coordinates array" do
-    display = Display.new
     game = new_game_instance(display)
 
     expect(game.ship_coordinates([5, 1], [[5, 1]])).to eq(true)
   end
 
     it "Returns false if move is not present in the ship coordinates array" do
-      display = Display.new
-
       game = new_game_instance(display)
 
       expect(game.ship_coordinates([9, 1],[[9, 2]])).to eq(false)
