@@ -46,7 +46,6 @@ class Game
   end
 
   def play_until_winner_is_found(number_of_coordinates, grid, ship_coordinates, converter_instance, grid_size)
-    past_moves = []
     move = new_move
     number_coordinate = move[0]
     letter_coordinate = move[1]
