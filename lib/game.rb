@@ -49,7 +49,6 @@ class Game
     move = new_move
     number_coordinate = move[0]
     letter_coordinate = move[1]
-
     if ship_coordinates(move, ship_coordinates)
       latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "/")
       @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
@@ -57,7 +56,14 @@ class Game
       latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "X")
       @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
     end
-    latest_grid
+  latest_grid
+  end
+
+  def count_ship_hits(players_latest_grid)
+    number_of_hits_each_row = players_latest_grid.map do |element|
+      element.count("/")
+    end
+    number_of_hits_each_row.reduce(:+)
   end
 
   def game_flow(grid_size, number_of_coordinates)
@@ -79,12 +85,8 @@ class Game
     p2_ship_hits = 0
 
     until p1_ship_hits == number_of_coordinates || p2_ship_hits == number_of_coordinates
-      p2_grid = play_until_winner_is_found(number_of_coordinates, p2_grid, p2_ship_coordinates, converter_instance, grid_size)
-      p1_array_of_hits = p2_grid.map do |element|
-        element.count("/")
-      end
-      p1_ship_hits = p1_array_of_hits.reduce(:+)
-
+      p1_latest_grid = play_until_winner_is_found(number_of_coordinates, p2_grid, p2_ship_coordinates, converter_instance, grid_size)
+      p1_ship_hits = count_ship_hits(p1_latest_grid)
       p2_move = computer.play_move(1, grid_size)
       letter_coordinate = p2_move[0][0]
       number_coordinate = p2_move[0][1]
@@ -94,20 +96,16 @@ class Game
       else
         latest_grid = @grid.mark_position(p1_grid, number_coordinate, letter_coordinate, "X")
       end
-
       @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
-
-      p1_grid = latest_grid
-      p2_array_of_hits = p1_grid.map do |element|
-        element.count("/")
-      end
-      p2_ship_hits = p2_array_of_hits.reduce(:+)
-    end
-
+      p2_latest_grid = latest_grid
+      p2_ship_hits = count_ship_hits(p2_latest_grid)
+     end
     if p1_ship_hits == number_of_coordinates
       p1_grid
     else
       p2_grid
     end
   end
+
+
 end
