@@ -33,24 +33,6 @@ describe Game do
     expect(output.string).to include("A", "B", "1", "2", ".", ".", "/", "X")
   end
 
-  it "Returns true if move has been played before" do
-    game = new_game_instance(display)
-
-    past_moves = [["1", "a"]]
-    move = ["1", "a"]
-
-    expect(game.move_played_before?(move, past_moves)).to eq(true)
-  end
-
-  it "Returns false if move hasn't been played before" do
-    game = new_game_instance(display)
-
-    past_moves = [["1", "a"]]
-    move = ["1", "b"]
-
-    expect(game.move_played_before?(move, past_moves)).to eq(false)
-  end
-
   it "Returns true if move is present in the ship coordinates array" do
     game = new_game_instance(display)
 

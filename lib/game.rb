@@ -15,10 +15,6 @@ class Game
     @converter = converter
   end
 
-  def move_played_before?(move, past_moves)
-    past_moves.include?(move)
-  end
-
   def ship_coordinates(move, ship_coordinates)
     ship_coordinates.include?(move)
   end
