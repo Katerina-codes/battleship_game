@@ -58,9 +58,15 @@ class Game
   def play_until_winner_is_found(number_of_coordinates, grid, ship_coordinates, converter_instance, grid_size)
     move = new_move
     number_coordinate, letter_coordinate = move[0], move[1]
-    latest_grid = mark_hit_or_miss(move, ship_coordinates, grid)
-    @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
-    latest_grid
+
+    if grid[number_coordinate][letter_coordinate] == "X" || grid[number_coordinate][letter_coordinate] == "/"
+      @display.display_repeated_move_error
+      play_until_winner_is_found(number_of_coordinates, grid, ship_coordinates, converter_instance, grid_size)
+    else
+      latest_grid = mark_hit_or_miss(move, ship_coordinates, grid)
+      @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
+      latest_grid
+    end
   end
 
   def count_ship_hits(players_latest_grid)
