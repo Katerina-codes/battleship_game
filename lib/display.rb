@@ -57,10 +57,20 @@ class Display
       @input.gets.chomp.downcase
     end
 
-    def get_ships_coordinates(number, converter_instance)
-      move_validator_instance = MoveValidator.new
+    def check_if_coordinate_is_duplicate(number, ship, past_coordinates)
+      if !past_coordinates.include?(ship)
+        coordinates.push(ship)
+        past_coordinates.push(ship)
+      else
+        @output.puts "You have entered this coordinate already"
+        get_ships_coordinates(number, converter_instance, (past_coordinates + coordinates))
+      end
+    end
 
+    def get_ships_coordinates(number, converter_instance, past_coordinates)
+      move_validator_instance = MoveValidator.new
       coordinates = []
+
       until number == 0
         @output.puts "Please enter a number coordinate from 1-10 for your ship"
         number_coordinate = only_get_valid_numbers(move_validator_instance)
@@ -71,15 +81,16 @@ class Display
         converted_letter_coord = converter_instance.letter_to_array_position(letter_coordinate)
         ship = [converted_number_coord, converted_letter_coord]
 
-        if coordinates.include?(ship)
-          @output.puts "You have entered this coordinate already"
-          get_ships_coordinates(number, converter_instance)
-        else
+        if !past_coordinates.include?(ship)
           coordinates.push(ship)
-          number -= 1
+          past_coordinates.push(ship)
+          latest_number = (number -= 1)
+        else
+          @output.puts "You have entered this coordinate already"
+          get_ships_coordinates(latest_number, converter_instance, (past_coordinates + coordinates))
         end
       end
-      coordinates
+      [coordinates, past_coordinates]
     end
 
     def only_get_valid_letters(move_validator_instance)
