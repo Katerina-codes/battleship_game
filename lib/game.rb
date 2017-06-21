@@ -3,6 +3,7 @@ require_relative 'player'
 require_relative 'grid'
 require_relative 'converter'
 require_relative 'move_validator'
+require_relative 'computer_player'
 
 class Game
 
@@ -14,12 +15,18 @@ class Game
     @converter = converter
   end
 
-  def move_played_before?(move, past_moves)
-    past_moves.include?(move)
-  end
-
   def ship_coordinates(move, ship_coordinates)
     ship_coordinates.include?(move)
+  end
+
+  def mark_hit_or_miss(move, ship_coordinates, grid)
+    number_coordinate = move[0]
+    letter_coordinate = move[1]
+    if ship_coordinates(move, ship_coordinates)
+      latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "/")
+    else
+      latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, "X")
+    end
   end
 
   def new_move
@@ -36,39 +43,82 @@ class Game
     [array_position_1, array_position_2]
   end
 
-  def game_flow(grid_size, number_of_coordinates)
-    grid_instance = @grid
-    converter_instance = @converter
-    grid = @grid.draw_grid(grid_size)
-    mark = "X"
-    past_moves = []
-    coordinates_list = number_of_coordinates
-
-    @display.display_grid(grid_size, grid_instance, converter_instance)
-    @display.display_place_ships_message
-    ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, converter_instance)
-
-    until coordinates_list == 0
-      move = new_move
-      number_coordinate = move[0]
-      letter_coordinate = move[1]
-
-      if move_played_before?(move, past_moves)
-        @display.display_repeated_move_error
-      else
-        past_moves.push(move)
-
-        if ship_coordinates(move, ship_coordinates)
-          coordinates_list -= 1
-          latest_hit_grid = @grid.mark_ship_hit(grid, number_coordinate, letter_coordinate)
-          @display.display_lastest_grid(latest_hit_grid, grid_size, converter_instance)
-        else
-          latest_grid = @grid.mark_position(grid, number_coordinate, letter_coordinate, mark)
-          @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
-        end
-      end
+  def board_with_ship_coordinates(grid_size, grid, ship_coordinates, converter_instance, mark)
+    my_ships = nil
+    ship_coordinates.map do |x, y|
+      my_ships = @grid.mark_position(grid, x, y, mark)
     end
-    latest_hit_grid
+    @display.display_lastest_grid(my_ships, grid_size, converter_instance)
+  end
+
+  def play_until_winner_is_found(number_of_coordinates, grid, ship_coordinates, converter_instance, grid_size)
+    move = new_move
+    number_coordinate, letter_coordinate = move[0], move[1]
+
+    if grid[number_coordinate][letter_coordinate] == "X" || grid[number_coordinate][letter_coordinate] == "/"
+      @display.display_repeated_move_error
+      play_until_winner_is_found(number_of_coordinates, grid, ship_coordinates, converter_instance, grid_size)
+    else
+      latest_grid = mark_hit_or_miss(move, ship_coordinates, grid)
+      @display.display_lastest_grid(latest_grid, grid_size, converter_instance)
+      latest_grid
+    end
+  end
+
+  def count_ship_hits(players_latest_grid)
+    number_of_hits_each_row = players_latest_grid.map do |element|
+      element.count("/")
+    end
+    number_of_hits_each_row.reduce(:+)
+  end
+
+  def find_winner(p1_ship_hits, p2_ship_hits, number_of_coordinates, p1_grid, p2_grid)
+    if p1_ship_hits == number_of_coordinates
+      p1_grid
+    else
+      p2_grid
+    end
+  end
+
+  def game_flow(grid_size, number_of_coordinates)
+    mark = "X"
+    computer = ComputerPlayer.new
+    p1_grid = @grid.draw_grid(grid_size)
+    p2_grid = @grid.draw_grid(grid_size)
+    past_coordinates = []
+
+    number_of_ship_coordinates = [5, 4, 3, 3, 2]
+
+    5.times do |get_coordinates|
+      number_of_coordinates_needed = number_of_ship_coordinates[-1]
+      get_coordinates = @display.get_ships_coordinates(number_of_coordinates_needed, @converter, past_coordinates)
+      p1_ship_coordinates = get_coordinates[0]
+      past_coordinates += get_coordinates[1]
+      p1_board = board_with_ship_coordinates(grid_size, p1_grid, p1_ship_coordinates, @converter, "O")
+      number_of_ship_coordinates.pop
+    end
+
+    p2_ship_coordinates = computer.play_move(number_of_coordinates, grid_size)
+    @display.display_lastest_grid(p2_grid, grid_size, @converter)
+
+    p1_ship_hits = 0
+    p2_ship_hits = 0
+
+    until p1_ship_hits == number_of_coordinates || p2_ship_hits == number_of_coordinates
+      p1_latest_grid = play_until_winner_is_found(number_of_coordinates, p2_grid, p2_ship_coordinates, @converter, grid_size)
+      p1_ship_hits = count_ship_hits(p1_latest_grid)
+
+      p2_move_in_array = computer.play_move(1, grid_size)
+      p2_move = p2_move_in_array[0]
+      letter_coordinate = p2_move[0]
+      number_coordinate = p2_move[1]
+
+      latest_grid = mark_hit_or_miss(p2_move, p2_ship_coordinates, p1_grid)
+      @display.display_lastest_grid(latest_grid, grid_size, @converter)
+      p2_latest_grid = latest_grid
+      p2_ship_hits = count_ship_hits(p2_latest_grid)
+     end
+  find_winner(p1_ship_hits, p2_ship_hits, number_of_coordinates, p1_grid, p2_grid)
   end
 
 end
