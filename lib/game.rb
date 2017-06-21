@@ -102,12 +102,12 @@ class Game
     p1_ship_hits, p2_ship_hits = 0
 
     until p1_ship_hits == number_of_coordinates || p2_ship_hits == number_of_coordinates
+
       p1_latest_grid = play_until_winner_is_found(number_of_coordinates, p2_grid, p2_ship_coordinates, @converter, grid_size)
       p1_ship_hits = count_ship_hits(p1_latest_grid)
       number_of_moves_needed = 1
       p2_move_in_array = computer.play_move(number_of_moves_needed, grid_size)
       p2_move = p2_move_in_array[0]
-      letter_coordinate, number_coordinate = p2_move[0], p2_move[1]
       p2_latest_grid = mark_hit_or_miss(p2_move, p2_ship_coordinates, p1_grid)
       @display.display_lastest_grid(p2_latest_grid, grid_size, @converter)
       p2_ship_hits = count_ship_hits(p2_latest_grid)
