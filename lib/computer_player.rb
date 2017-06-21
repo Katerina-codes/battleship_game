@@ -8,6 +8,5 @@ class ComputerPlayer
     end
   ship_coordinates
   end
-
-
+ 
 end
