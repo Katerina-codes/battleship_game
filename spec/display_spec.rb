@@ -55,7 +55,7 @@ describe Display do
     input = StringIO.new("1\na")
     display = Display.new(output, input)
     past_coordinates = []
-    expect(display.get_ships_coordinates(1, converter, past_coordinates)).to eq([[[0, 0]], [[0, 0]]])
+    expect(display.get_ships_coordinates(1,converter, past_coordinates)).to eq([[[0, 0]], [[0, 0]]])
   end
 
   it "displays error message if coordinate is repeated" do

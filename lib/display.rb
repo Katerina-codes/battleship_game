@@ -81,7 +81,7 @@ class Display
         number_coordinate = only_get_valid_numbers(move_validator_instance)
         @output.puts "Please enter a letter coordinate from A-J for your ship"
         letter_coordinate = only_get_valid_letters(move_validator_instance)
-        
+
         converted_number_coord = converter_instance.number_to_array_position(number_coordinate)
         converted_letter_coord = converter_instance.letter_to_array_position(letter_coordinate)
         ship = [converted_number_coord, converted_letter_coord]
@@ -92,7 +92,6 @@ class Display
           number_of_coordinates_needed -= 1
         else
           @output.puts "You have entered this coordinate already"
-          get_ships_coordinates(number_of_coordinates_needed, converter_instance, (past_coordinates + coordinates))
         end
       end
       [coordinates, past_coordinates]
