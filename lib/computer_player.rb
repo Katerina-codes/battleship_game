@@ -9,5 +9,4 @@ class ComputerPlayer
   ship_coordinates
   end
 
-
 end
