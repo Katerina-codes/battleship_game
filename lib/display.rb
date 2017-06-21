@@ -35,6 +35,10 @@ class Display
       @output.puts "Please place your ships in preparation for battle"
     end
 
+    def asks_for_a_number_of_ships(number_of_ships)
+      @output.puts "Please enter #{number_of_ships} coordinates"
+    end
+
     def display_lastest_grid(grid, number, converter_instance)
 
       letters = converter_instance.number_to_letters(number)

@@ -10,6 +10,6 @@ class MoveValidator
   def is_letter_valid?(letter)
     range = ("a".."j").to_a
     range.include?(letter)
-  end
+  end 
 
 end

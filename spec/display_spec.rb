@@ -54,13 +54,15 @@ describe Display do
   it "gets 1 unique coordinate" do
     input = StringIO.new("1\na")
     display = Display.new(output, input)
-    expect(display.get_ships_coordinates(1, converter)).to eq([[0, 0]])
+    past_coordinates = []
+    expect(display.get_ships_coordinates(1, converter, past_coordinates)).to eq([[[0, 0]], [[0, 0]]])
   end
 
   it "displays error message if coordinate is repeated" do
     input = StringIO.new("1\na\n1\na\n1\nb\n2\na\n2\nb")
     display = Display.new(output, input)
-    display.get_ships_coordinates(2, converter)
+    past_coordinates = []
+    display.get_ships_coordinates(2, converter, past_coordinates)
     expect(output.string).to include("You have entered this coordinate already\n")
   end
 
@@ -90,6 +92,11 @@ describe Display do
     input = StringIO.new("a")
 
     expect(display_with_output_and_input(output, input).only_get_valid_letters(MoveValidator.new)).to eq("a")
+  end
+
+  it "asks for 2 ships to be placed" do
+    display.asks_for_a_number_of_ships(2)
+    expect(output.string).to eq("Please enter 2 coordinates\n")
   end
 
   def display_with_output_and_input(output, input)
