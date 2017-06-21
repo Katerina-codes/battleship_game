@@ -85,9 +85,18 @@ class Game
     computer = ComputerPlayer.new
     p1_grid = @grid.draw_grid(grid_size)
     p2_grid = @grid.draw_grid(grid_size)
+    past_coordinates = []
 
-    p1_ship_coordinates = @display.get_ships_coordinates(number_of_coordinates, @converter)
+    number_of_ship_coordinates = [5, 4, 3, 3, 2]
+
+    5.times do |ship_coordinates|
+    @display.asks_for_a_number_of_ships(number_of_ship_coordinates[-1])
+    ship_coordinates = @display.get_ships_coordinates(number_of_ship_coordinates[-1], @converter, past_coordinates)
+    number_of_ship_coordinates.pop
+    p1_ship_coordinates = ship_coordinates[0]
+    latest_past_coordinates = ship_coordinates[1]
     p1_board = board_with_ship_coordinates(grid_size, p1_grid, p1_ship_coordinates, @converter, "O")
+    end
 
     p2_ship_coordinates = computer.play_move(number_of_coordinates, grid_size)
     @display.display_lastest_grid(p2_grid, grid_size, @converter)
