@@ -15,14 +15,14 @@ describe Game do
     expect(game.ship_coordinates([5, 1], [[5, 1]])).to eq(true)
   end
 
-    it "Returns false if move is not present in the ship coordinates array" do
-      game = new_game_instance(display)
+  it "Returns false if move is not present in the ship coordinates array" do
+    game = new_game_instance(display)
 
-      expect(game.ship_coordinates([9, 1],[[9, 2]])).to eq(false)
-    end
+    expect(game.ship_coordinates([9, 1],[[9, 2]])).to eq(false)
+  end
 
-    def new_game_instance(display)
-      Game.new(display, player, grid, move_validator, converter)
-    end
+  def new_game_instance(display)
+    Game.new(display, player, grid, move_validator, converter)
+  end
 
 end
