@@ -89,13 +89,13 @@ class Game
 
     number_of_ship_coordinates = [5, 4, 3, 3, 2]
 
-    5.times do |ship_coordinates|
-    @display.asks_for_a_number_of_ships(number_of_ship_coordinates[-1])
-    ship_coordinates = @display.get_ships_coordinates(number_of_ship_coordinates[-1], @converter, past_coordinates)
-    number_of_ship_coordinates.pop
-    p1_ship_coordinates = ship_coordinates[0]
-    latest_past_coordinates = ship_coordinates[1]
-    p1_board = board_with_ship_coordinates(grid_size, p1_grid, p1_ship_coordinates, @converter, "O")
+    5.times do |get_coordinates|
+      number_of_coordinates_needed = number_of_ship_coordinates[-1]
+      get_coordinates = @display.get_ships_coordinates(number_of_coordinates_needed, @converter, past_coordinates)
+      p1_ship_coordinates = get_coordinates[0]
+      past_coordinates += get_coordinates[1]
+      p1_board = board_with_ship_coordinates(grid_size, p1_grid, p1_ship_coordinates, @converter, "O")
+      number_of_ship_coordinates.pop
     end
 
     p2_ship_coordinates = computer.play_move(number_of_coordinates, grid_size)
